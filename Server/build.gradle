@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+shadowJar {
+    baseName = 'bootcamp'
+    configurations = [project.configurations.compile]
+    transform(com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer)
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+task distDocker(type: Exec){
+    dependsOn shadowJar
+    commandLine './buildAndRunContainer.sh'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core'
+    compile 'io.logz.log4j2:logzio-log4j2-appender:1.0.5'
+}
+
