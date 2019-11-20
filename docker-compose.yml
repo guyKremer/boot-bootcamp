@@ -1,13 +1,19 @@
 version: "3"
 
 services:
-  bootcampserver:
+  bootcampserver1:
     build: ./Server
-    image: webappbootcamp:tag
+    image: bootserverimage
+
+  bootcampserver2:
+    build: ./Server
+    image: bootserverimage
 
   bootcamphaproxy:
     build: ./HaProxy
+    image: haproxy
     ports:
       - 8080:80
     depends_on:
-      - bootcampserver
+      - bootcampserver1
+      - bootcampserver2
