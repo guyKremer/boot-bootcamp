@@ -8,7 +8,7 @@ shadowJar {
     configurations = [project.configurations.compile]
     transform(com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer)
     manifest {
-        attributes 'Main-Class': 'Main'
+        attributes 'Main-Class': 'jettyServer.Main'
     }
 }
 version '1.0-SNAPSHOT'
@@ -29,5 +29,9 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core'
     compile 'io.logz.log4j2:logzio-log4j2-appender:1.0.5'
+    compile group:'org.eclipse.jetty',name: 'jetty-servlet', version: '9.2.3.v20140905'
+    compile group:'org.glassfish.jersey.core',name: 'jersey-server', version: '2.7'
+    compile group:'org.glassfish.jersey.containers',name: 'jersey-container-servlet-core', version: '2.7'
+    compile group:'org.glassfish.jersey.containers',name: 'jersey-container-jetty-http', version: '2.7'
 }
 
