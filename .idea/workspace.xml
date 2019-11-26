@@ -11,19 +11,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HaProxy/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/HaProxy/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HaProxy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/HaProxy/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/Main$MyHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Resource.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Resource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/resources/main/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/resources/main/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/tmp/shadowJar/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Resource.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,6 +105,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/Server/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -118,7 +113,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Server/src/main/java/jettyServer/configuration" />
       <recent name="$PROJECT_DIR$/HaProxy" />
       <recent name="$PROJECT_DIR$/Server" />
     </key>
