@@ -13,11 +13,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Resource.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Resource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Resource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.bootcamp-1.0-SNAPSHOT-all.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="jettyServer.Main" />
       <module name="Bootcamp.Server.main" />

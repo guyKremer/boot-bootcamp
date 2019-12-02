@@ -14,6 +14,7 @@ public class ServerModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        binder().requireExplicitBindings();
         JerseyConfiguration configuration = JerseyConfiguration.builder()
                 .addPackage("jettyServer")
                 .addPort(8001)
