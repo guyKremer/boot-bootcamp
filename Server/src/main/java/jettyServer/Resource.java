@@ -1,36 +1,26 @@
 package jettyServer;
 
 
-import com.google.inject.Guice;
-import jettyServer.configuration.ServerConfiguration;
-import logSender.LogSender;
-import logSender.LogSenderModule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import com.google.inject.Injector;
 
 @Path("boot-bootcamp")
 public class Resource {
-    private ServerConfiguration serverConfiguration;
-    private static int i=0;
-    private static Double containerKey=Math.random();
-    private Injector logSenderInjector = Guice.createInjector(new LogSenderModule());
 
-    @Inject
-    public Resource(ServerConfiguration serverconfiguration) {
-        this.serverConfiguration = serverconfiguration;
-    }
+    private static int i =0;
+    private static Double containerKey = Math.random();
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String sendLogs(){
-        LogSender logSender = logSenderInjector.getInstance(LogSender.class);
         String logMsg = "boot boot "+(++i) +"   "+containerKey.toString();
-        logSender.sendLog(logMsg);
-        return "OK";
+        Logger logger = LogManager.getLogger(Resource.class);
+        logger.warn(logMsg);
+        return logMsg;
     }
 }
