@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jettyServer.IndexingResourceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-04T14:28:30" hostname="ip-192-168-0-245.ec2.internal" time="0.637">
+  <properties/>
+  <testcase name="run" classname="jettyServer.IndexingResourceTest" time="0.637"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
