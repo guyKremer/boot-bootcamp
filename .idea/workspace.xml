@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b84034f6-b8ad-457b-a80d-f58decd8787f" name="Default Changelist" comment="" />
+    <list default="true" id="b84034f6-b8ad-457b-a80d-f58decd8787f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/IndexingResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Resource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/SearchResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/test/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/IndexingResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/indexing/IndexingResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/loggerResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/SearchResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/SearchResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/test/Test.java" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +46,6 @@
           <activation />
         </task>
         <task path="$PROJECT_DIR$/Server">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$">
           <activation />
         </task>
         <projects_view>
@@ -78,13 +101,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit4 Test Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="SOFT" />
   </component>
   <component name="ProjectId" id="1TpNAvyrJW0JXuRzzq8PwUVUmi9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -92,14 +115,27 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/Server/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="jettyServer" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Server/src/main/java/jettyServer/configuration" />
       <recent name="$PROJECT_DIR$/HaProxy" />
       <recent name="$PROJECT_DIR$/Server" />
     </key>
@@ -116,17 +152,82 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.bootcamp-1.0-SNAPSHOT-all.jar">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="jettyServer.Main" />
-      <module name="Bootcamp.Server.main" />
+  <component name="RunManager" selected="Gradle.SearchResourceTest">
+    <configuration name="IndexingResourceTest.run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;jettyServer.IndexingResourceTest.run&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Server:cleanTest" />
+            <option value=":Server:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="SearchResourceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;jettyServer.SearchResourceTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Server:cleanTest" />
+            <option value=":Server:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="SearchResourceTest.run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;jettyServer.SearchResourceTest.run&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Server:cleanTest" />
+            <option value=":Server:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="IndexTest.run" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Bootcamp.Server.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value=".*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="IndexTest" />
+      <option name="METHOD_NAME" value="run" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="Server-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" />
-      <method v="2" />
     </configuration>
     <configuration name="bootcamp-1.0-SNAPSHOT-all.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" />
@@ -134,9 +235,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.SearchResourceTest" />
+        <item itemvalue="Gradle.IndexingResourceTest.run" />
+        <item itemvalue="Gradle.SearchResourceTest.run" />
+        <item itemvalue="JUnit.IndexTest.run" />
         <item itemvalue="JAR Application.bootcamp-1.0-SNAPSHOT-all.jar" />
-        <item itemvalue="JAR Application.Server-1.0-SNAPSHOT.jar" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -151,21 +254,6 @@
       <option name="presentableId" value="Default" />
       <updated>1574152936998</updated>
     </task>
-    <task id="LOCAL-00001" summary="Revert &quot;Revert &quot;elastic index+search&quot;&quot;&#10;&#10;This reverts commit b0248dff">
-      <created>1575474585646</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1575474585647</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Revert &quot;Revert &quot;Revert &quot;elastic index+search&quot;&quot;&quot;&#10;&#10;This reverts commit 60919020">
-      <created>1575474754155</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1575474754155</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,10 +268,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Revert &quot;Revert &quot;elastic index+search&quot;&quot;&#10;&#10;This reverts commit b0248dff" />
-    <MESSAGE value="Revert &quot;Revert &quot;Revert &quot;elastic index+search&quot;&quot;&quot;&#10;&#10;This reverts commit 60919020" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Revert &quot;Revert &quot;elastic index+search&quot;&quot;&quot;&#10;&#10;This reverts commit 60919020" />
   </component>
 </project>
