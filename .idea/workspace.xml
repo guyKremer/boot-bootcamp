@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b84034f6-b8ad-457b-a80d-f58decd8787f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/IndexingResource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Resource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/SearchResource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/test/Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/IndexingResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/indexing/IndexingResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/loggerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/SearchResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/SearchResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/test/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/test/java/jettyServer/SearchResourceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/jettyServer/SearchResourceTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
