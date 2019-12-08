@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -20,8 +21,8 @@ import java.util.Map;
 
 @Path("index")
 public class IndexingResource {
-    private RestHighLevelClient elasticClient;
-    private IndexRequest indexRequest;
+    private final RestHighLevelClient elasticClient;
+    private final IndexRequest indexRequest;
 
 
     @Inject
@@ -32,17 +33,17 @@ public class IndexingResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String post(RequestObj body, @HeaderParam("user-agent") String userAgent){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response post(RequestObj body, @HeaderParam("user-agent") String userAgent){
         Map<String,String> source = new HashMap<>();
         try{
             source.put("message",body.getMessage());
             source.put("header",userAgent);
             IndexResponse response= elasticClient.index(indexRequest.source(source));
-            return response.status().toString();
+            return Response.ok().entity(response.status().toString()).build();
         }
         catch (Exception e){
-            return e.getMessage();
+           return Response.status(Response.Status.BAD_REQUEST).entity(e.getStackTrace()).build();
         }
     }
 }

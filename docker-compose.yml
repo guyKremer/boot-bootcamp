@@ -2,6 +2,7 @@ version: "3"
 
 services:
   bootcampserver1:
+    build: ./Server
     image: bootserverimage:latest
 
   bootcampserver2:

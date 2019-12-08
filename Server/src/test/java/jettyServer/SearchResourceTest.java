@@ -7,46 +7,39 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+
+import static jettyServer.TestUtils.generateRandomString;
 import static org.awaitility.Awaitility.await;
 
 
 public class SearchResourceTest {
 
-    private String uri;
-    private Client client;
+    private String elasticHostUri;
 
     public SearchResourceTest(){
-        uri = "http://localhost/search";
-        client = ClientBuilder.newClient();
+        elasticHostUri = "http://localhost/search";
     }
 
     @Test
-    public void run() throws IOException {
-        Map indexedFields;
-        IndexingResourceTest indexTest = new IndexingResourceTest();
+    public void run(){
+        String messageValue = generateRandomString();
+        String headerValue = generateRandomString();
+        TestUtils.indexDocument(elasticHostUri,messageValue,headerValue);
 
-        indexedFields=indexTest.index(client);
-        await().atMost(2,TimeUnit.SECONDS).until(documentIndexed(indexedFields));
+        await().atMost(2,TimeUnit.SECONDS).until(() -> isDocumentIndexed(messageValue,headerValue));
     }
-    private Callable<Boolean> documentIndexed(Map indexedFields)throws IOException {
+    private boolean isDocumentIndexed(String messageValue,String headerValue) {
+        ObjectMapper mapper = new ObjectMapper();
+        int expectedHits = 1;
 
-        return () ->{
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root;
-            int actualTotalHits = 0 , expectedHits = 1;
-
-            Response response = client.target(uri)
-                    .queryParam("message",indexedFields.get("message"))
-                    .queryParam("header",indexedFields.get("header"))
-                    .request()
-                    .get();
-            root = mapper.readTree(response.readEntity(String.class));
-            actualTotalHits = root.path("hits").path("total").getValueAsInt();
-            return actualTotalHits==expectedHits;
-        };
+        try{
+            Response response = TestUtils.searchDocument(elasticHostUri,messageValue,headerValue);
+            JsonNode root = mapper.readTree(response.readEntity(String.class));
+            return root.path("hits").path("total").getValueAsInt() == expectedHits;
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
-
 }

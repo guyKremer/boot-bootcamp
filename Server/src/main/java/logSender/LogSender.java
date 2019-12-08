@@ -8,7 +8,6 @@ import javax.inject.Inject;
 @Singleton
 public class LogSender {
     private Sender sender;
-
     @Inject
     public LogSender(Sender sender){
         this.sender = sender;

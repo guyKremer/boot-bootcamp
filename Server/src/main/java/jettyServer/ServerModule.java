@@ -15,8 +15,15 @@ import org.elasticsearch.client.RestHighLevelClient;
 
 import javax.inject.Named;
 import java.io.File;
+import java.io.IOException;
 
 public class ServerModule extends AbstractModule {
+
+    private ObjectMapper objectMapper;
+
+    public ServerModule(){
+
+    }
 
     @Override
     protected void configure() {
@@ -33,27 +40,27 @@ public class ServerModule extends AbstractModule {
 
     @Provides
     public ServerConfiguration provideServerConfiguration() {
-        ServerConfiguration serverConfiguration = new ServerConfiguration();
+        ServerConfiguration serverConfiguration;
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationConfig.Feature.AUTO_DETECT_FIELDS, true);
         try {
-            serverConfiguration = mapper.readValue(new File("./configurations/server.config"), ServerConfiguration.class);
+            serverConfiguration = mapper.readValue(new File("/usr/server.config"), ServerConfiguration.class);
+            return serverConfiguration;
         }
         catch (Exception e ){
-
+            throw new RuntimeException(e);
         }
-        return serverConfiguration;
     }
 
     @Provides
     RestHighLevelClient provideRestHighLevelClient(){
-       return new RestHighLevelClient(RestClient.builder(
-                new HttpHost("elasticSearch", 9200, "http")));
+        ServerConfiguration serverConfiguration = provideServerConfiguration();
+        return new RestHighLevelClient(RestClient.builder(
+                  new HttpHost(serverConfiguration.getElasticSearchHost(),serverConfiguration.getGetElasticSearchPort(), "http")));
     }
 
     @Provides
     IndexRequest provideIndexRequest() {
         return new IndexRequest("bootcamp", "_doc");
     }
-
 }
