@@ -2,7 +2,7 @@
 <Configuration status="WARN">
     <Appenders>
         <LogzioAppender name="Logzio">
-            <logzioToken>JAGpvPXmPRDMKXkMHpAdtzvFvjPbAaKk</logzioToken>
+            <logzioToken>iFYbfCSSviqbhJYqdcsOXcmAfYKKOmnA</logzioToken>
             <logzioType>myAwesomeType</logzioType>
             <logzioUrl>https://listener.logz.io:8071</logzioUrl>
         </LogzioAppender>
@@ -14,3 +14,4 @@
         </Root>
     </Loggers>
 </Configuration>
+

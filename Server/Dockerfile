@@ -1,5 +1,6 @@
 FROM java:8-jdk-alpine
-COPY ./build/libs/ /usr/
+COPY ./build/libs/bootcamp-1.0-SNAPSHOT-all.jar /usr/
+COPY ./src/main/resources/server.config /usr/
 WORKDIR /usr/
 # KIVID
 CMD java -jar bootcamp-1.0-SNAPSHOT-all.jar
