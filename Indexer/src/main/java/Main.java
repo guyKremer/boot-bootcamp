@@ -1,4 +1,5 @@
 import Indexer.Indexer;
+import di.IndexerModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 

@@ -1,4 +1,4 @@
-package jettyServer.resources.indexing;
+package jettyServer.resources.indexingResource;
 
 
 import javax.ws.rs.Consumes;
@@ -24,23 +24,22 @@ import java.util.Properties;
 @Path("index")
 public class IndexingResource {
     private final ServerConfiguration serverConfiguration;
+    private final  Producer producer;
 
 
     @Inject
-    public IndexingResource(ServerConfiguration serverConfiguration){
+    public IndexingResource(ServerConfiguration serverConfiguration, Producer producer){
         this.serverConfiguration = serverConfiguration;
+        this.producer=producer;
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(RequestObj body, @HeaderParam("user-agent") String userAgent) {
+    public Response post(IndexingRequestObj body, @HeaderParam("user-agent") String userAgent) {
         Map source = createSource(body.getMessage(),userAgent);
         String topic = "bootcamp";
-        String brokerHost = "kafkabroker";
-        int brokerPort = 9092;
 
-        Producer producer = createKafkaProducer(brokerHost,brokerPort);
         ProducerRecord<String, Map> record = new ProducerRecord<>(topic, source);
         try{
             producer.send(record).get();
