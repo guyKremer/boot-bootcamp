@@ -1,9 +1,7 @@
-package general;
+package kafka;
 
-import org.apache.kafka.common.serialization.Deserializer;
-import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-
+import org.apache.kafka.common.serialization.Deserializer;
 import java.util.Map;
 
 public class StreamToMapDeserializer implements Deserializer {

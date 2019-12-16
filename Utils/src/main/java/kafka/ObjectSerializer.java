@@ -1,4 +1,4 @@
-package jettyServer.general;
+package kafka;
 
 import org.apache.kafka.common.serialization.Serializer;
 import org.codehaus.jackson.map.ObjectMapper;

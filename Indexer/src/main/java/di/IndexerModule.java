@@ -3,7 +3,7 @@ package Indexer;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import configuration.IndexerConfiguration;
-import general.StreamToMapDeserializer;
+import kafka.StreamToMapDeserializer;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.codehaus.jackson.map.ObjectMapper;

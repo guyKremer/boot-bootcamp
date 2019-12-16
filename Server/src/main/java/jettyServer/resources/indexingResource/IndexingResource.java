@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import jettyServer.configuration.ServerConfiguration;
-import jettyServer.general.ObjectSerializer;
+import kafka.ObjectSerializer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
