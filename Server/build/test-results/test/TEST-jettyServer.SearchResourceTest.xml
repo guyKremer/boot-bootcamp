@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="jettyServer.SearchResourceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-16T09:03:34" hostname="ip-192-168-0-245.ec2.internal" time="1.917">
-  <properties/>
-  <testcase name="run" classname="jettyServer.SearchResourceTest" time="1.917"/>
-  <system-out><![CDATA[response:OK
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

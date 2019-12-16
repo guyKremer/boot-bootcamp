@@ -1,1 +1,6 @@
 /.idea/
+/.DS_Store/
+/.gradle/
+/.build/
+**/build
+*.DS_Store
