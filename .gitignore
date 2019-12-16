@@ -2,6 +2,5 @@
 /.DS_Store/
 /.gradle/
 /.build/
-/HaProxy/.build/
-/Server/.build/
-/Indexer/.build/
+**/build
+*.DS_Store
