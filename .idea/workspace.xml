@@ -13,40 +13,37 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HaProxy/build/libs/HaProxy-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/HaProxy/build/libs/HaProxy-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/ServerModule.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/configuration/ServerConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/configuration/ServerConfiguration.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/resources/SearchResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/resources/SearchResource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/resources/indexing/IndexingResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/resources/indexing/IndexingResource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/resources/loggerResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/jettyServer/resources/loggerResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/main/logSender/LogSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/main/logSender/LogSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/IndexingResourceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/IndexResourceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/IndexResourceTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/SearchResourceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/SearchResourceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/TestUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/classes/java/test/jettyServer/TestUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/libs/Server-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/reports/tests/test/classes/jettyServer.IndexingResourceTest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/reports/tests/test/classes/jettyServer.SearchResourceTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/libs/bootcamp-1.0-SNAPSHOT-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/reports/tests/test/classes/jettyServer.IndexResourceTest.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/reports/tests/test/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/reports/tests/test/packages/jettyServer.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/reports/tests/test/packages/jettyServer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/resources/main/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/resources/main/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/test-results/test/TEST-jettyServer.IndexingResourceTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/build/test-results/test/TEST-jettyServer.SearchResourceTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/test-results/test/TEST-jettyServer.IndexResourceTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/test-results/test/binary/output.bin.idx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/ServerModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/configuration/ServerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/configuration/ServerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/configuration/server.config" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/server.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/SearchResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/SearchResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/indexing/IndexingResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/indexing/IndexingResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/loggerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/jettyServer/resources/LoggerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/logSender/LogSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/logSender/LogSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/test/java/jettyServer/IndexingResourceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/test/java/jettyServer/IndexResourceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/jettyServer/IndexResourceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/test/java/jettyServer/SearchResourceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/jettyServer/SearchResourceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/Bootcamp-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Bootcamp-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/test/java/jettyServer/TestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/jettyServer/TestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,6 +63,9 @@
           <activation />
         </task>
         <task path="$PROJECT_DIR$/Server">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
           <activation />
         </task>
         <projects_view>
@@ -138,7 +138,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/Server/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Indexer" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -148,11 +148,17 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="jettyServer" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Indexer" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="general" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Server/src/main/resources" />
@@ -173,13 +179,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.SearchResourceTest.run">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="jettyServer.Main" />
       <module name="Bootcamp.Server.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="jettyServer.*" />
+          <option name="PATTERN" value="jettyServer.Utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -187,12 +193,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IndexResourceTest.run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IndexResourceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;jettyServer.IndexResourceTest.run&quot;" />
+        <option name="scriptParameters" value="--tests &quot;jettyServer.IndexResourceTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -207,12 +213,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="IndexingResourceTest.run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IndexResourceTest.run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;jettyServer.IndexingResourceTest.run&quot;" />
+        <option name="scriptParameters" value="--tests &quot;jettyServer.IndexResourceTest.run&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -269,11 +275,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Gradle.IndexResourceTest.run" />
         <item itemvalue="Gradle.SearchResourceTest.run" />
+        <item itemvalue="Gradle.IndexResourceTest.run" />
+        <item itemvalue="Gradle.IndexResourceTest" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.SearchResourceTest" />
-        <item itemvalue="Gradle.IndexingResourceTest.run" />
       </list>
     </recent_temporary>
   </component>
@@ -295,7 +301,21 @@
       <option name="project" value="LOCAL" />
       <updated>1575475220777</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="kafka exercise">
+      <created>1575904431182</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575904431182</updated>
+    </task>
+    <task id="LOCAL-00003" summary="remove jar dir">
+      <created>1575904554090</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575904554090</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -313,6 +333,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Revert &quot;Revert &quot;Revert &quot;Revert &quot;elastic index+search&quot;&quot;&quot;&quot;&#10;&#10;This reverts commit 09b23849" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Revert &quot;Revert &quot;Revert &quot;elastic index+search&quot;&quot;&quot;&quot;&#10;&#10;This reverts commit 09b23849" />
+    <MESSAGE value="kafka exercise" />
+    <MESSAGE value="remove jar dir" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove jar dir" />
   </component>
 </project>

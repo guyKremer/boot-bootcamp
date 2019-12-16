@@ -12,7 +12,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/HaProxy" />
+            <option value="$PROJECT_DIR$/Indexer" />
             <option value="$PROJECT_DIR$/Server" />
+            <option value="$PROJECT_DIR$/Utils" />
           </set>
         </option>
         <option name="useQualifiedModuleNames" value="true" />

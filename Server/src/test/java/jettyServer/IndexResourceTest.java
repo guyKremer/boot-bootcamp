@@ -22,7 +22,7 @@ public class IndexResourceTest {
 
         String messageValue = generateRandomString();
         String headerValue = generateRandomString();
-        Response response = TestUtils.indexDocument(elasticHostUri,messageValue,headerValue);
+        Response response = TestUtils.indexDocument(messageValue,headerValue);
 
         Assert.assertEquals(200,response.getStatus());
     }

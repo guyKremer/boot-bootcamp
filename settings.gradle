@@ -1,4 +1,6 @@
 rootProject.name = 'Bootcamp'
 include 'Server'
 include 'HaProxy'
+include 'Indexer'
+include 'Utils'
 

@@ -14,21 +14,24 @@ import java.util.Map;
 
 public class TestUtils {
 
-    public static Response indexDocument(String elasticHostUri,String messageValue,String headerValue){
+    public static final String INDEX_URI = "http://localhost/index";
+    public static final String SEARCH_URI = "http://localhost/search";
+
+    public static Response indexDocument(String messageValue,String headerValue){
         Client client = ClientBuilder.newClient();
         Map<String,String> reqBody = new HashMap<>();
         Map<String,String> indexedFields = new HashMap<>();
-
 
         indexedFields.put("message",messageValue);
         indexedFields.put("header",headerValue);
 
         try{
             reqBody.put("message",messageValue);
-            Response response = client.target(elasticHostUri)
+            Response response = client.target(INDEX_URI)
                     .request()
                     .header("user-agent",headerValue)
                     .post(Entity.json(new ObjectMapper().writeValueAsString(reqBody)));
+            System.out.println("response:" + response.readEntity(String.class));
             return response;
         }
         catch (IOException e){
@@ -36,9 +39,9 @@ public class TestUtils {
         }
     }
 
-    public static Response searchDocument(String elasticHostUri,String messageValue,String headerValue){
+    public static Response searchDocument(String messageValue,String headerValue){
         Client client = ClientBuilder.newClient();
-         return client.target(elasticHostUri)
+         return client.target(SEARCH_URI)
                     .queryParam("message", messageValue)
                     .queryParam("header", headerValue)
                     .request()

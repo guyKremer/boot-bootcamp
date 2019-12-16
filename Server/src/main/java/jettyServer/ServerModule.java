@@ -6,16 +6,14 @@ import io.logz.guice.jersey.JerseyModule;
 import io.logz.guice.jersey.configuration.JerseyConfiguration;
 import jettyServer.configuration.ServerConfiguration;
 import org.apache.http.HttpHost;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.client.ElasticsearchClient;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
-import javax.inject.Named;
 import java.io.File;
-import java.io.IOException;
 
 public class ServerModule extends AbstractModule {
 
@@ -57,10 +55,5 @@ public class ServerModule extends AbstractModule {
         ServerConfiguration serverConfiguration = provideServerConfiguration();
         return new RestHighLevelClient(RestClient.builder(
                   new HttpHost(serverConfiguration.getElasticSearchHost(),serverConfiguration.getGetElasticSearchPort(), "http")));
-    }
-
-    @Provides
-    IndexRequest provideIndexRequest() {
-        return new IndexRequest("bootcamp", "_doc");
     }
 }

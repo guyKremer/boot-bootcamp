@@ -46,7 +46,6 @@ public class SearchResource {
         SearchResponse searchResponse = elasticClient.search(searchRequest);
         return searchResponse.toString();
     }
-
     private SearchRequest buildQuery(String message,String header){
         SearchRequest searchRequest = new SearchRequest();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();

@@ -10,6 +10,7 @@ public class ServerConfiguration {
     private String elasticSearchHost;
     private int elasticSearchPort;
 
+
     public String getLogMessage() {
         return logMessage;
     }
@@ -31,4 +32,5 @@ public class ServerConfiguration {
     public void setElasticSearchPort(int elasticSearchPort) {
         this.elasticSearchPort = elasticSearchPort;
     }
+
 }
