@@ -48,7 +48,6 @@ public class IndexingResource {
         catch (Exception e){
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getCause()).build();
         }
-
     }
 
     private Map<String,Object> createSource(String message, String userAgent) {
@@ -57,17 +56,5 @@ public class IndexingResource {
         source.put("message",message);
         source.put("header",userAgent);
         return source;
-    }
-
-    private KafkaProducer createKafkaProducer(String brokerHost,int brokerPort){
-
-        String kafkaUri = brokerHost+":"+brokerPort;
-
-        Properties props = new Properties();
-        props.put("bootstrap.servers", kafkaUri);
-        props.put("acks", "all");
-        props.put("key.serializer", ObjectSerializer.class.getName());
-        props.put("value.serializer", ObjectSerializer.class.getName());
-        return new KafkaProducer<>(props);
     }
 }
