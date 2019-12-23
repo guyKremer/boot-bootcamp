@@ -69,7 +69,7 @@ public class Indexer {
     private boolean index(ConsumerRecord<String,Map> record){
 
 
-        String index = "bootcamp";
+        String index = "bootacmpppp";
         String logType="_doc";
 
         try {
