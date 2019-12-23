@@ -3,11 +3,9 @@ version: "3"
 services:
   bootcampserver1:
     build: ./Server
-    image: bootserverimage:latest
 
   bootcampserver2:
     build: ./Server
-    image: bootserverimage:latest
 
   elasticSearch:
     image: elastic/elasticsearch:6.8.3
@@ -17,7 +15,7 @@ services:
       - 9200:9200
 
   haproxy:
-    image:  haproxy:latest
+    build: ./HaProxy
     ports:
       - 80:80
     depends_on:
@@ -45,7 +43,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   indexer:
-    image: indexerimage:latest
+    build: ./Indexer
     ports:
       - "9092"
     depends_on:

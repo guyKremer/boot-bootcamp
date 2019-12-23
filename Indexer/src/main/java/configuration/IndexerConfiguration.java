@@ -66,7 +66,5 @@ public class IndexerConfiguration {
         return elasticSearchPort;
     }
 
-    public void setElasticSearchPort(int elasticSearchPort) {
-        this.elasticSearchPort = elasticSearchPort;
-    }
+    public void setElasticSearchPort(int elasticSearchPort) { this.elasticSearchPort = elasticSearchPort; }
 }

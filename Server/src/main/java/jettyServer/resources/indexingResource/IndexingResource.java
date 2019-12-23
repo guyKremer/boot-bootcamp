@@ -48,6 +48,9 @@ public class IndexingResource {
         catch (Exception e){
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getCause()).build();
         }
+        finally {
+            producer.close();
+        }
     }
 
     private Map<String,Object> createSource(String message, String userAgent) {

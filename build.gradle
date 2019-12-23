@@ -17,6 +17,6 @@ dependencies {
 }
 
 //runs 2 instances of the server module with load balancing
-task run(type: Exec, dependsOn:[':Server:distDocker',':Indexer:distDocker']) {
+task run(type: Exec, dependsOn:[':Server:distDocker',':Indexer:distDocker',':HaProxy:distDocker']) {
     commandLine './runDockerCompose.sh'
 }

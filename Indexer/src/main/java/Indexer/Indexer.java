@@ -1,5 +1,6 @@
 package Indexer;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -31,60 +34,34 @@ public class Indexer {
 
     public void run(){
 
-        while (true) {
-            ConsumerRecords<String, Map> records = consumer.poll(Duration.ofMillis(indexerConfiguration.getIntervalForPoll()));
-            boolean indexingSucceeded = index(records);
-
-            if(indexingSucceeded){
-                consumer.commitSync();
-            }
-        }
-    }
-
-    // Index a batch of records.
-    // returns false if one of the records failed to index.
-    private boolean index(ConsumerRecords<String, Map> records) {
-
-        boolean res = true;
-
         try{
-            for (ConsumerRecord<String,Map> record : records){
-                boolean indexingSucceeded = index(record);
-                if( ! indexingSucceeded){
-                    res = false;
-                    break;
+            while (true) {
+                ConsumerRecords<String, Map> records = consumer.poll(Duration.ofMillis(indexerConfiguration.getIntervalForPoll()));
+                if(!records.isEmpty()){
+                    index(records);
+                    consumer.commitSync();
                 }
             }
         }
-        catch (Exception e){
-            System.out.println(e.getCause());
-            throw new RuntimeException(e);
+        finally {
+            consumer.close();
         }
-
-        return res;
     }
+    private BulkResponse index(ConsumerRecords<String, Map> records) {
 
-    // Index a single record.
-    // returns false if the record failed to index.
-    private boolean index(ConsumerRecord<String,Map> record){
-
-
-        String index = "bootacmpppp";
+        String index = "bootacmp";
         String logType="_doc";
+        BulkRequest elasticBulkRequest = new BulkRequest();
 
         try {
-            IndexResponse response = elasticClient.index(new IndexRequest(index, logType).source(record.value()));
-            if(response.status().getStatus() == Response.Status.CREATED.getStatusCode()){
-                return true;
+            for (ConsumerRecord<String,Map> record : records){
+                elasticBulkRequest.add(new IndexRequest(index, logType).source(record.value()));
             }
-            else{
-                return false;
-            }
+            BulkResponse elasticBulkResponse = elasticClient.bulk(elasticBulkRequest);
+            return elasticBulkResponse;
         }
-        catch (Exception e){
-            System.out.println(e.getCause());
-            throw new RuntimeException(e);
+        catch (IOException e){
+            throw new RuntimeException(e.getCause());
         }
-
     }
 }
