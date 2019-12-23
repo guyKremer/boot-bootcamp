@@ -21,11 +21,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 @Path("search")
-public class SearchResource {
+public class QueryResource {
     private final RestHighLevelClient elasticClient;
 
     @Inject
-    public SearchResource(RestHighLevelClient restHighLevelClient) {
+    public QueryResource(RestHighLevelClient restHighLevelClient) {
         this.elasticClient = restHighLevelClient;
     }
 
