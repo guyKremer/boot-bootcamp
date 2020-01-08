@@ -1,15 +1,14 @@
 package di;
 
+import accounts.AccountsClient;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import configuration.IndexerConfiguration;
-import kafka.StreamToMapDeserializer;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
@@ -53,8 +52,8 @@ public class IndexerModule extends AbstractModule {
         props.setProperty("group.id", "test");
         props.setProperty("enable.auto.commit", "false");
         props.setProperty("auto.commit.interval.ms", Long.toString(indexerConfiguration.getIntervalForCommit()));
-        props.setProperty("key.deserializer", StreamToMapDeserializer.class.getName());
-        props.setProperty("value.deserializer", StreamToMapDeserializer.class.getName());
+        props.setProperty("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
+        props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         return props;
     }
 
@@ -62,5 +61,10 @@ public class IndexerModule extends AbstractModule {
     RestHighLevelClient provideRestHighLevelClient(IndexerConfiguration indexerConfiguration){
         return new RestHighLevelClient(RestClient.builder(
                 new HttpHost(indexerConfiguration.getElasticSearchHost(),indexerConfiguration.getElasticSearchPort(), "http")));
+    }
+
+    @Provides
+    AccountsClient providesAccountsClient(IndexerConfiguration indexerConfiguration){
+        return new AccountsClient(indexerConfiguration.getAccountsClientHost());
     }
 }

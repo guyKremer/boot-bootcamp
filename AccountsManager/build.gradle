@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '5.2.0'
-
 }
 
 group 'Bootcamp'
@@ -9,17 +8,16 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
-
 shadowJar {
-    baseName = 'indexer'
     configurations = [project.configurations.compile]
     transform(com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer)
     manifest {
         attributes 'Main-Class': 'Main'
     }
+}
+
+repositories {
+    mavenCentral()
 }
 
 task distDocker(type: Exec){
@@ -29,17 +27,24 @@ task distDocker(type: Exec){
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'com.google.inject', name: 'guice', version: '4.0'
-    compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
-    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.0'
-    compile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.1.0'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.29.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api'
     compile 'org.apache.logging.log4j:log4j-core:2.9.0'
     compile 'io.logz.log4j2:logzio-log4j2-appender:1.0.5'
+    compile group:'org.eclipse.jetty',name: 'jetty-servlet', version: '9.2.3.v20140905'
     compile group:'org.glassfish.jersey.core',name: 'jersey-server', version: '2.7'
     compile group:'org.glassfish.jersey.containers',name: 'jersey-container-servlet-core', version: '2.7'
     compile group:'org.glassfish.jersey.containers',name: 'jersey-container-jetty-http', version: '2.7'
+    compile group: 'com.google.inject', name: 'guice', version: '4.0'
     compile 'io.logz:guice-jersey:1.0.9'
-    compile project(':Utils')
+    compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
+    compile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.1.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.1'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.2.2'
+    compile group: 'org.mybatis', name: 'mybatis-guice', version: '3.10'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+
     compile project(':AccountsManager:clent')
+
 }

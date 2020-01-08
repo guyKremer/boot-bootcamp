@@ -1,18 +1,18 @@
 package jettyServer;
 
+import accounts.AccountsClient;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import io.logz.guice.jersey.JerseyModule;
 import io.logz.guice.jersey.configuration.JerseyConfiguration;
 import jettyServer.configuration.ServerConfiguration;
-import kafka.ObjectSerializer;
 import org.apache.http.HttpHost;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
-import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
@@ -20,8 +20,6 @@ import java.io.File;
 import java.util.Properties;
 
 public class ServerModule extends AbstractModule {
-
-    private ObjectMapper objectMapper;
 
     public ServerModule(){
 
@@ -41,6 +39,7 @@ public class ServerModule extends AbstractModule {
     }
 
     @Provides
+    @Singleton
     public ServerConfiguration provideServerConfiguration() {
         ServerConfiguration serverConfiguration;
         ObjectMapper mapper = new ObjectMapper();
@@ -70,9 +69,14 @@ public class ServerModule extends AbstractModule {
         Properties props = new Properties();
         props.put("bootstrap.servers", kafkaUri);
         props.put("acks", "all");
-        props.put("key.serializer", ObjectSerializer.class.getName());
-        props.put("value.serializer", ObjectSerializer.class.getName());
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         return new KafkaProducer<>(props);
+    }
+
+    @Provides
+    AccountsClient providesAccountsClient(ServerConfiguration serverConfiguration){
+        return new AccountsClient(serverConfiguration.getAccountsClientHost());
     }
 
 }

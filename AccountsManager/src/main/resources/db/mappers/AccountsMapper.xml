@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="db.mappers.AccountsMapper">
+    <insert id = "insertAccount" parameterType = "pojos.AccountData">
+        insert into ACCOUNTS (name,esIndexName,id,accountToken)
+        values (#{name}, #{esIndexName}, #{id}, #{accountToken})
+        <selectKey resultType="long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() as id
+        </selectKey>
+    </insert>
+
+    <select id="selectAccount" parameterType="String" resultType="pojos.AccountData">
+        SELECT * FROM ACCOUNTS WHERE accountToken = #{token}
+    </select>
+</mapper>
+

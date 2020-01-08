@@ -9,6 +9,8 @@ public class ServerConfiguration {
     private String logMessage;
     private String elasticSearchHost;
     private int elasticSearchPort;
+    private String accountsClientHost;
+    private String kafkaTopic;
 
 
     public String getLogMessage() {
@@ -28,9 +30,27 @@ public class ServerConfiguration {
 
     public int getGetElasticSearchPort() { return elasticSearchPort; }
 
-
     public void setElasticSearchPort(int elasticSearchPort) {
         this.elasticSearchPort = elasticSearchPort;
     }
 
+    public String getAccountsClientHost() {
+        return accountsClientHost;
+    }
+
+    public void setAccountsClientHost(String accountsClientHost) {
+        this.accountsClientHost = accountsClientHost;
+    }
+
+    public int getElasticSearchPort() {
+        return elasticSearchPort;
+    }
+
+    public String getKafkaTopic() {
+        return kafkaTopic;
+    }
+
+    public void setKafkaTopic(String kafkaTopic) {
+        this.kafkaTopic = kafkaTopic;
+    }
 }

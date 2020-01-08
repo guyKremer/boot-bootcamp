@@ -1,8 +1,5 @@
 package configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class IndexerConfiguration {
 
       private String brokerHost;
@@ -12,6 +9,7 @@ public class IndexerConfiguration {
       private long intervalForPoll;
       private String elasticSearchHost;
       private int elasticSearchPort;
+      private String AccountsClientHost;
 
 
     public String getBrokerHost() {
@@ -21,6 +19,8 @@ public class IndexerConfiguration {
     public void setBrokerHost(String brokerHost) {
         this.brokerHost = brokerHost;
     }
+
+
 
     public int getBrokerPort() {
         return brokerPort;
@@ -68,5 +68,13 @@ public class IndexerConfiguration {
 
     public void setElasticSearchPort(int elasticSearchPort) {
         this.elasticSearchPort = elasticSearchPort;
+    }
+
+    public String getAccountsClientHost() {
+        return AccountsClientHost;
+    }
+
+    public void setAccountsClientHost(String accountsClientHost) {
+        AccountsClientHost = accountsClientHost;
     }
 }

@@ -50,6 +50,8 @@ dependencies {
     compile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.1.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.1'
+    compile group: 'org.apache.kafka', name: 'connect-json', version: '0.9.0.0'
     compile project(':Utils')
+    compile project(':AccountsManager:clent')
 }
 
