@@ -16,7 +16,7 @@ public class AccountsResource {
     @Path("create-account")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void createAccount(CreateAccountRequestObj body){
+    public void createAccount(CreateAccountRequestObj body) {
 
     }
 }

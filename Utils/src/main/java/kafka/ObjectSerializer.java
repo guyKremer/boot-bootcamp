@@ -18,8 +18,7 @@ public class ObjectSerializer implements Serializer {
         try {
             byte[] retVal = objectMapper.writeValueAsBytes(data);
             return retVal;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

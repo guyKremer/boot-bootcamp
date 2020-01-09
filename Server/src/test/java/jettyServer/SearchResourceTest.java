@@ -20,7 +20,7 @@ public class SearchResourceTest {
         String headerValue = generateRandomString();
         TestUtils.indexDocument(messageValue,headerValue);
 
-        await().atMost(5,TimeUnit.SECONDS).until(() -> isDocumentIndexed(messageValue,headerValue));
+        await().atMost(10,TimeUnit.SECONDS).until(() -> isDocumentIndexed(messageValue,headerValue));
     }
     private boolean isDocumentIndexed(String messageValue,String headerValue) {
         ObjectMapper mapper = new ObjectMapper();

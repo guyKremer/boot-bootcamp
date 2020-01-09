@@ -2,6 +2,7 @@ package kafka;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.apache.kafka.common.serialization.Deserializer;
+
 import java.util.Map;
 
 public class StreamToMapDeserializer implements Deserializer {
@@ -15,9 +16,8 @@ public class StreamToMapDeserializer implements Deserializer {
     public Map deserialize(String topic, byte[] data) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(data,0,data.length,Map.class);
-        }
-        catch (Exception e) {
+            return mapper.readValue(data, 0, data.length, Map.class);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

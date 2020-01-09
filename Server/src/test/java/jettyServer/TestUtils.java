@@ -3,6 +3,7 @@ package jettyServer;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
+import org.slf4j.Logger;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -31,7 +32,6 @@ public class TestUtils {
                     .request()
                     .header("user-agent",headerValue)
                     .post(Entity.json(new ObjectMapper().writeValueAsString(reqBody)));
-            System.out.println("response:" + response.readEntity(String.class));
             return response;
         }
         catch (IOException e){
