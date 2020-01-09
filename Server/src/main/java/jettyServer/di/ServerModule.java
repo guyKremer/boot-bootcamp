@@ -61,7 +61,7 @@ public class ServerModule extends AbstractModule {
                   new HttpHost(serverConfiguration.getElasticSearchHost(),serverConfiguration.getGetElasticSearchPort(), "http")));
     }
     @Provides
-    public Producer provideKafkaProducer(){
+    public Producer provideKafkaProducer(ServerConfiguration serverConfiguration){
 
         String brokerHost = "kafkabroker";
         int brokerPort = 9092;
