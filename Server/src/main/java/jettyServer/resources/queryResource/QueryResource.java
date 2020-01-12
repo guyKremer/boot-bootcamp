@@ -1,6 +1,7 @@
 package jettyServer.resources.queryResource;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -41,19 +42,19 @@ public class QueryResource {
     public Response query(@Context HttpHeaders httpHeaders, @QueryParam("message") String message, @QueryParam("header") String header) {
 
         String accountToken = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
-        boolean authenticated = accountsClient.isAuthenticated(accountToken);
 
-        if(! authenticated){
-            throw new NotAuthorizedException("Token not authorized");
-        }
 
         try {
-            SearchRequest searchRequest = buildQuery(accountToken,message,header);
+            AccountData account = accountsClient.getAccount(accountToken);
+            SearchRequest searchRequest = buildQuery(account,message,header);
             String hits = getHits(searchRequest);
             return Response.ok().entity(hits).build();
         }
+        catch (NotAuthorizedException noe){
+            throw noe;
+        }
         catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            throw new InternalServerErrorException("Something went wrong");
         }
     }
 
@@ -61,10 +62,8 @@ public class QueryResource {
         SearchResponse searchResponse = elasticClient.search(searchRequest);
         return searchResponse.toString();
     }
-    private SearchRequest buildQuery(String accountToken,String message,String header){
-        AccountData account = accountsClient.getAccount(accountToken);
-        String indexName = account.getEsIndexName();
-        System.out.println(indexName);
+    private SearchRequest buildQuery(AccountData account,String message,String header){
+        String indexName = account.getIndexName();
         SearchRequest searchRequest = new SearchRequest(indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb =  new BoolQueryBuilder();

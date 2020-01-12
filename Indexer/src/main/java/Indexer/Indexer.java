@@ -1,11 +1,8 @@
 package Indexer;
 
-import java.io.IOException;
 import java.time.Duration;
 
 import accounts.AccountsClient;
-import accounts.exceptions.OperationFailedException;
-import accounts.pojos.AccountData;
 import com.google.inject.Inject;
 import configuration.IndexerConfiguration;
 import kafka.KafkaRecord;
@@ -14,8 +11,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.elasticsearch.action.DocWriteResponse;
-import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -64,7 +59,7 @@ public class Indexer {
         try {
             for (ConsumerRecord<String, String> record : records){
                 KafkaRecord kafkaRecord = mapper.readValue(record.value(),KafkaRecord.class);
-                String accountIndex = accountsClient.getAccount(kafkaRecord.getAccountToken()).getEsIndexName();
+                String accountIndex = accountsClient.getAccount(kafkaRecord.getAccountToken()).getIndexName();
                 elasticBulkRequest.add(new IndexRequest(accountIndex, logType).source(kafkaRecord.getSource()));
             }
             BulkResponse elasticBulkResponse = elasticClient.bulk(elasticBulkRequest);

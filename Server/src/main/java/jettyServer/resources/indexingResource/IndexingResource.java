@@ -7,7 +7,6 @@ import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +15,6 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import accounts.AccountsClient;
-import accounts.pojos.AccountData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jettyServer.configuration.ServerConfiguration;
 import kafka.KafkaRecord;
@@ -45,7 +43,6 @@ public class IndexingResource {
         String accountToken = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
         boolean authenticated = accountsClient.isAuthenticated(accountToken);
 
-        System.out.println(authenticated);
         if(! authenticated ){
             throw new NotAuthorizedException("Token not authorized");
         }

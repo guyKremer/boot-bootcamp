@@ -1,6 +1,7 @@
 package db.mappers;
 
-import pojos.AccountData;
+
+import accounts.pojos.AccountData;
 
 public interface AccountsMapper {
 

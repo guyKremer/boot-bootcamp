@@ -16,6 +16,9 @@ services:
     build: ./AccountsManager
     depends_on:
       - mysql
+    ports:
+      - 8002:80
+
 
   elasticSearch:
     image: elastic/elasticsearch:6.8.3

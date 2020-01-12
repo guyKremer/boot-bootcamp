@@ -39,7 +39,7 @@ public class AccountsResource {
             return Response.status(Response.Status.CREATED).entity(account).build();
         }
         catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Couldn't create account").build();
         }
     }
 
@@ -53,11 +53,11 @@ public class AccountsResource {
             AccountData account = accountsClient.getAccount(accountToken);
             return Response.status(Response.Status.OK).entity(account).build();
         }
-        catch (NotAuthorizedException notAuthorizedException){
-            throw notAuthorizedException;
+        catch (NotAuthorizedException noe){
+            throw noe;
         }
         catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Couldn't retrieve account").build();
         }
     }
 }

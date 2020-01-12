@@ -1,6 +1,7 @@
 package jettyServer;
 
 import accounts.AccountsClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -11,8 +12,6 @@ import org.apache.http.HttpHost;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
@@ -43,7 +42,6 @@ public class ServerModule extends AbstractModule {
     public ServerConfiguration provideServerConfiguration() {
         ServerConfiguration serverConfiguration;
         ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationConfig.Feature.AUTO_DETECT_FIELDS, true);
         try {
             serverConfiguration = mapper.readValue(new File("/usr/server.config"), ServerConfiguration.class);
             return serverConfiguration;

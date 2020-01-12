@@ -6,6 +6,4 @@ public class CreateAccountRequest {
 
     public String getAccountName() { return accountName; }
 
-    public void setAccountName(String accountName) { this.accountName = accountName; }
-
 }

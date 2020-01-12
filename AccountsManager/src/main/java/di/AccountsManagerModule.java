@@ -9,6 +9,7 @@ import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
 
 import java.io.File;
+import java.io.IOException;
 
 public class AccountsManagerModule extends AbstractModule {
 
@@ -29,5 +30,10 @@ public class AccountsManagerModule extends AbstractModule {
         bind(DefaultObjectWrapperFactory.class);
         bind(DefaultObjectFactory.class);
         install(new JerseyModule(configuration));
+        try {
+            install(new MyBatisAccountsModule(mapper.readValue(new File("/usr/myBatis.config"), MybatisConfiguration.class)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

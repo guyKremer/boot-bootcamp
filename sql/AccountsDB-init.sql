@@ -1,7 +1,7 @@
 CREATE TABLE ACCOUNTS (
     id INT(6) NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    esIndexName VARCHAR(255) NOT NULL,
-    accountToken VARCHAR(33) NOT NULL,
+    indexName VARCHAR(255) NOT NULL,
+    token VARCHAR(33) NOT NULL,
     PRIMARY KEY(id)
 );

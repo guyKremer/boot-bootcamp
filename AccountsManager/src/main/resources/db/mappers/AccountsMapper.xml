@@ -4,16 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="db.mappers.AccountsMapper">
-    <insert id = "insertAccount" parameterType = "pojos.AccountData">
-        insert into ACCOUNTS (name,esIndexName,id,accountToken)
-        values (#{name}, #{esIndexName}, #{id}, #{accountToken})
+    <insert id = "insertAccount" parameterType = "accounts.pojos.AccountData">
+        insert into ACCOUNTS (name,indexName,id,token)
+        values (#{name}, #{indexName}, #{id}, #{token})
         <selectKey resultType="long" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID() as id
         </selectKey>
     </insert>
 
-    <select id="selectAccount" parameterType="String" resultType="pojos.AccountData">
-        SELECT * FROM ACCOUNTS WHERE accountToken = #{token}
+    <select id="selectAccount" parameterType="String" resultType="accounts.pojos.AccountData">
+        SELECT * FROM ACCOUNTS WHERE token = #{token}
     </select>
 </mapper>
 

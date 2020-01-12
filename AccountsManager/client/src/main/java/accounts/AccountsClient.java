@@ -1,11 +1,12 @@
 package accounts;
 
 
-import accounts.exceptions.OperationFailedException;
+import accounts.exceptions.DbAccessException;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,13 +23,13 @@ public class AccountsClient {
         this.accountsManagerUri = accountsManagerUri;
     }
 
-    public AccountData getAccount(String accountToken) throws OperationFailedException{
+    public AccountData getAccount(String accountToken){
         Client client = ClientBuilder.newClient();
         Response response = client.target(accountsManagerUri)
                     .request().header("X-ACCOUNT-TOKEN",accountToken).get();
 
         if( response.getStatusInfo().equals(Response.Status.UNAUTHORIZED)){
-            throw new NotAuthorizedException(response.readEntity(String.class));
+                throw new NotAuthorizedException("Token not authorized");
         }
 
         else {
@@ -37,7 +38,7 @@ public class AccountsClient {
                 return mapper.readValue(accountDataAsJson,AccountData.class);
             }
             catch (Exception e){
-                throw  new RuntimeException(e);
+                throw new RuntimeException(e);
             }
         }
     }
@@ -61,10 +62,6 @@ public class AccountsClient {
         Client client = ClientBuilder.newClient();
         Response response = client.target(accountsManagerUri)
                 .request().post(Entity.json(createAccountRequest));
-
-        if( !response.getStatusInfo().equals(Response.Status.CREATED)){
-            throw new RuntimeException();
-        }
 
         try {
             String accountDataAsJson = response.readEntity(String.class);

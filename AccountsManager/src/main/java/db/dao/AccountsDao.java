@@ -2,28 +2,41 @@ package db.dao;
 
 import javax.inject.Inject;
 
+import accounts.exceptions.DbAccessException;
+import accounts.pojos.AccountData;
 import db.mappers.AccountsMapper;
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mybatis.guice.transactional.Transactional;
-import pojos.AccountData;
 
 public class AccountsDao {
+
+    Logger logger = LogManager.getLogger(AccountsDao.class);
+
 
     @Inject
     private AccountsMapper accountsMapper;
 
     @Transactional
     public AccountData selectAccount(String token){
-        return accountsMapper.selectAccount(token);
+        try{
+            return accountsMapper.selectAccount(token);
+        }
+        catch (PersistenceException pe){
+            logger.debug(pe.getCause());
+            throw new RuntimeException();
+        }
     }
 
     @Transactional
-    public void insertAccount(AccountData accountData) throws PersistenceException{
+    public void insertAccount(AccountData accountData){
         try{
             accountsMapper.insertAccount(accountData);
         }
-        catch (PersistenceException e){
-            throw e;
+        catch (PersistenceException pe){
+            logger.debug(pe.getCause());
+            throw new RuntimeException();
         }
     }
 }
