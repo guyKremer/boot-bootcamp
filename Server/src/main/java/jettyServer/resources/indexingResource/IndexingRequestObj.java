@@ -1,6 +1,6 @@
-package jettyServer.resources.indexing;
+package jettyServer.resources.indexingResource;
 
-public class RequestObj {
+public class IndexingRequestObj {
     private String message;
 
     public String getMessage() {

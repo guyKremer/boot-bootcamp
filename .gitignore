@@ -1,6 +1,5 @@
 /.idea/
 /.DS_Store/
 /.gradle/
-/.build/
-**/build
+**/build/
 *.DS_Store

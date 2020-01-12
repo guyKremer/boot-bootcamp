@@ -3,11 +3,9 @@ version: "3"
 services:
   bootcampserver1:
     build: ./Server
-    image: bootserverimage:latest
 
   bootcampserver2:
     build: ./Server
-    image: bootserverimage:latest
 
   elasticSearch:
     image: elastic/elasticsearch:6.8.3
@@ -17,10 +15,37 @@ services:
       - 9200:9200
 
   haproxy:
-    image:  haproxy:latest
+    build: ./HaProxy
     ports:
       - 80:80
     depends_on:
       - bootcampserver1
       - bootcampserver2
+      - elasticSearch
+
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    ports:
+      - "2181:2181"
+  kafkabroker:
+    image: wurstmeister/kafka:2.11-2.0.0
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+#      KAFKA_ADVERTISED_HOST_NAME: kafkabroker
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafkabroker:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_CREATE_TOPICS: "bootcamp:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  indexer:
+    build: ./Indexer
+    ports:
+      - "9092"
+    depends_on:
+      - kafkabroker
       - elasticSearch
