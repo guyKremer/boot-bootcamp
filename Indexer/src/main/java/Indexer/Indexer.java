@@ -1,6 +1,7 @@
 package Indexer;
 
 import java.time.Duration;
+import static java.util.Objects.requireNonNull;
 
 import accounts.AccountsClient;
 import com.google.inject.Inject;
@@ -17,42 +18,39 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RestHighLevelClient;
 
 
+
 public class Indexer {
 
-    IndexerConfiguration indexerConfiguration;
-    KafkaConsumer consumer;
-    RestHighLevelClient elasticClient;
-    AccountsClient accountsClient;
+    private final IndexerConfiguration indexerConfiguration;
+    private final KafkaConsumer consumer;
+    private final RestHighLevelClient elasticClient;
+    private final AccountsClient accountsClient;
+    private static final String LOG_TYPE = "_doc";
 
     @Inject
-    public Indexer(KafkaConsumer consumer, RestHighLevelClient restHighLevelClient, IndexerConfiguration indexerConfiguration,AccountsClient accountsClient){
-        this.indexerConfiguration = indexerConfiguration;
-        this.consumer = consumer;
-        this.elasticClient = restHighLevelClient;
-        this.accountsClient = accountsClient;
+    public Indexer(KafkaConsumer consumer, RestHighLevelClient restHighLevelClient, IndexerConfiguration indexerConfiguration, AccountsClient accountsClient){
+        this.indexerConfiguration = requireNonNull(indexerConfiguration);
+        this.consumer = requireNonNull(consumer);
+        this.elasticClient = requireNonNull(restHighLevelClient);
+        this.accountsClient = requireNonNull(accountsClient);
     }
 
     public void run(){
 
-        try{
+        try {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(indexerConfiguration.getIntervalForPoll()));
-                if(!records.isEmpty()){
-                    BulkResponse bulkItemResponses = index(records);
-                    consumer.commitSync();
+                if (!records.isEmpty()) {
+                    index(records);
+                    consumer.commitAsync();
                 }
             }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        finally {
+        } finally {
             consumer.close();
         }
     }
-    private BulkResponse index(ConsumerRecords<String, String> records) {
 
-        String logType="_doc";
+    private BulkResponse index(ConsumerRecords<String, String> records) {
         ObjectMapper mapper = new ObjectMapper();
         BulkRequest elasticBulkRequest = new BulkRequest();
 
@@ -60,7 +58,7 @@ public class Indexer {
             for (ConsumerRecord<String, String> record : records){
                 KafkaRecord kafkaRecord = mapper.readValue(record.value(),KafkaRecord.class);
                 String accountIndex = accountsClient.getAccount(kafkaRecord.getAccountToken()).getIndexName();
-                elasticBulkRequest.add(new IndexRequest(accountIndex, logType).source(kafkaRecord.getSource()));
+                elasticBulkRequest.add(new IndexRequest(accountIndex, LOG_TYPE).source(kafkaRecord.getSource()));
             }
             BulkResponse elasticBulkResponse = elasticClient.bulk(elasticBulkRequest);
             return elasticBulkResponse;

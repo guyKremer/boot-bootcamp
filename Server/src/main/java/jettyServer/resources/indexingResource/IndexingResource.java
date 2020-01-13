@@ -16,23 +16,27 @@ import javax.ws.rs.core.Response;
 
 import accounts.AccountsClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jettyServer.configuration.ServerConfiguration;
+import jettyServer.configuration.IndexingResourceConfiguration;
 import kafka.KafkaRecord;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import static java.util.Objects.requireNonNull;
+
+
 @Path("index")
 public class IndexingResource {
-    private final ServerConfiguration serverConfiguration;
-    private final  Producer producer;
+    private final IndexingResourceConfiguration indexingResourceConfiguration;
+    private final Producer producer;
     private final AccountsClient accountsClient;
 
 
     @Inject
-    public IndexingResource(ServerConfiguration serverConfiguration, AccountsClient accountsClient, Producer producer){
-        this.serverConfiguration = serverConfiguration;
-        this.producer=producer;
-        this.accountsClient = accountsClient;
+    public IndexingResource(IndexingResourceConfiguration indexingResourceConfiguration,AccountsClient accountsClient ,Producer producer) {
+        this.indexingResourceConfiguration = requireNonNull(indexingResourceConfiguration);
+        this.producer = requireNonNull(producer);
+        this.accountsClient = requireNonNull(accountsClient);
+
     }
 
     @POST
@@ -50,13 +54,13 @@ public class IndexingResource {
         try{
             KafkaRecord kafkaRecord = new KafkaRecord(accountToken,body.getMessage(),userAgent);
             String kafkaRecordAsJson = objectMapper.writeValueAsString(kafkaRecord);
-            ProducerRecord<String, String> record = new ProducerRecord<>(serverConfiguration.getKafkaTopic(), kafkaRecordAsJson);
+            ProducerRecord<String, String> record = new ProducerRecord<>(indexingResourceConfiguration.getKafkaTopic(), kafkaRecordAsJson);
 
-            producer.send(record).get();
+            producer.send(record);
             return Response.ok().build();
         }
         catch (Exception e){
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getCause()).build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 }

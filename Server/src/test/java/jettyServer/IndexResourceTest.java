@@ -22,7 +22,7 @@ public class IndexResourceTest {
         AccountsClient accountsClient = new AccountsClient(ACCOUNTS_MANAGER_URI);
         String messageValue = generateRandomString();
         String headerValue = generateRandomString();
-        AccountData account = createRandomAccount(accountsClient);
+        AccountData account = createRandomAccount();
         Response response = TestUtils.indexDocument(account.getToken(),messageValue,headerValue);
 
         Assert.assertEquals(200,response.getStatus());

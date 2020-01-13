@@ -2,79 +2,53 @@ package configuration;
 
 public class IndexerConfiguration {
 
-      private String brokerHost;
-      private int brokerPort;
-      private String topic;
-      private long intervalForCommit;
-      private long intervalForPoll;
-      private String elasticSearchHost;
-      private int elasticSearchPort;
-      private String AccountsClientHost;
+    private String brokerHost;
+    private int brokerPort;
+    private String topic;
+    private long intervalForCommit;
+    private long intervalForPoll;
+    private String elasticSearchHost;
+    private int elasticSearchPort;
+    private String groupId;
+    private String accountsClientHost;
 
 
     public String getBrokerHost() {
         return brokerHost;
     }
 
-    public void setBrokerHost(String brokerHost) {
-        this.brokerHost = brokerHost;
-    }
-
-
-
     public int getBrokerPort() {
         return brokerPort;
     }
 
-    public void setBrokerPort(int brokerPort) {
-        this.brokerPort = brokerPort;
+    public String getGroupId() {
+        return groupId;
     }
 
     public String getTopic() {
         return topic;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
 
     public long getIntervalForCommit() {
         return intervalForCommit;
-    }
-
-    public void setIntervalForCommit(long intervalForCommit) {
-        this.intervalForCommit = intervalForCommit;
     }
 
     public long getIntervalForPoll() {
         return intervalForPoll;
     }
 
-    public void setIntervalForPoll(long intervalForPoll) {
-        this.intervalForPoll = intervalForPoll;
-    }
 
     public String getElasticSearchHost() {
         return elasticSearchHost;
     }
 
-    public void setElasticSearchHost(String elasticSearchHost) {
-        this.elasticSearchHost = elasticSearchHost;
-    }
 
     public int getElasticSearchPort() {
         return elasticSearchPort;
     }
 
-    public void setElasticSearchPort(int elasticSearchPort) {
-        this.elasticSearchPort = elasticSearchPort;
-    }
-
     public String getAccountsClientHost() {
-        return AccountsClientHost;
-    }
-
-    public void setAccountsClientHost(String accountsClientHost) {
-        AccountsClientHost = accountsClientHost;
+        return accountsClientHost;
     }
 }

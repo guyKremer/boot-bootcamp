@@ -2,11 +2,10 @@ package jettyServer;
 
 import accounts.AccountsClient;
 import accounts.pojos.AccountData;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static jettyServer.TestUtils.createRandomAccount;
@@ -25,7 +24,7 @@ public class SearchResourceTest {
         String messageValue = generateRandomString();
         String headerValue = generateRandomString();
         AccountsClient accountsClient = new AccountsClient(ACCOUNTS_MANAGER_URI);
-        AccountData account = createRandomAccount(accountsClient);
+        AccountData account = createRandomAccount();
         TestUtils.indexDocument(account.getToken(),messageValue,headerValue);
 
         await().atMost(10, TimeUnit.SECONDS).until(() -> isDocumentIndexed(account.getToken(),messageValue,headerValue));

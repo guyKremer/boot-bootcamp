@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static jettyServer.TestUtils.createRandomAccount;
 import static jettyServer.TestUtils.generateRandomString;
 import static jettyServer.TestUtils.indexDocument;
 import static jettyServer.TestUtils.isDocumentIndexed;
@@ -21,7 +22,6 @@ public class MultiTenancyTest {
 
     @Test
     public void run() {
-        AccountsClient accountsClient = new AccountsClient(ACCOUNTS_MANAGER_URI);
         ObjectMapper mapper = new ObjectMapper();
 
         try {
@@ -37,12 +37,16 @@ public class MultiTenancyTest {
             CreateAccountRequest firstCreateAccountRequest = mapper.readValue(firstCreateAccountRequestAsJson, CreateAccountRequest.class);
             CreateAccountRequest secondCreateAccountRequest = mapper.readValue(secondCreateAccountRequestAsJson, CreateAccountRequest.class);
 
-            AccountData account1 = accountsClient.createAccount(firstCreateAccountRequest);
-            AccountData account2 = accountsClient.createAccount(secondCreateAccountRequest);
-
+            AccountData account1 = createRandomAccount();
+            AccountData account2 = createRandomAccount();
             indexDocument(account1.getToken(), account1Message, account1header);
             indexDocument(account2.getToken(), account2Message, account2header);
 
+
+
+            /*
+                Waiting until the documents are indexed
+             */
             await().atMost(10, TimeUnit.SECONDS).until(() -> isDocumentIndexed(account1.getToken(), account1Message, account1header));
             await().atMost(10, TimeUnit.SECONDS).until(() -> isDocumentIndexed(account2.getToken(), account2Message, account2header));
 

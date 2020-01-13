@@ -23,6 +23,9 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.json.JSONException;
 
+import static java.util.Objects.requireNonNull;
+
+
 import java.io.IOException;
 
 @Path("search")
@@ -32,9 +35,9 @@ public class QueryResource {
     private final AccountsClient accountsClient;
 
     @Inject
-    public QueryResource(RestHighLevelClient restHighLevelClient,AccountsClient accountsClient) {
-        this.elasticClient = restHighLevelClient;
-        this.accountsClient = accountsClient;
+    public QueryResource(RestHighLevelClient restHighLevelClient, AccountsClient accountsClient) {
+        this.elasticClient = requireNonNull(restHighLevelClient);
+        this.accountsClient = requireNonNull(accountsClient);
     }
 
     @GET
@@ -46,14 +49,12 @@ public class QueryResource {
 
         try {
             AccountData account = accountsClient.getAccount(accountToken);
-            SearchRequest searchRequest = buildQuery(account,message,header);
+            SearchRequest searchRequest = buildQuery(account, message, header);
             String hits = getHits(searchRequest);
             return Response.ok().entity(hits).build();
-        }
-        catch (NotAuthorizedException noe){
+        } catch (NotAuthorizedException noe) {
             throw noe;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new InternalServerErrorException("Something went wrong");
         }
     }
@@ -62,13 +63,14 @@ public class QueryResource {
         SearchResponse searchResponse = elasticClient.search(searchRequest);
         return searchResponse.toString();
     }
-    private SearchRequest buildQuery(AccountData account,String message,String header){
+
+    private SearchRequest buildQuery(AccountData account, String message, String header) {
         String indexName = account.getIndexName();
         SearchRequest searchRequest = new SearchRequest(indexName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        BoolQueryBuilder qb =  new BoolQueryBuilder();
+        BoolQueryBuilder qb = new BoolQueryBuilder();
         qb.must(QueryBuilders.matchQuery("message", message));
-        qb.must(QueryBuilders.matchQuery("header",header));
+        qb.must(QueryBuilders.matchQuery("header", header));
         searchSourceBuilder.query(qb);
         searchRequest.source(searchSourceBuilder);
         return searchRequest;

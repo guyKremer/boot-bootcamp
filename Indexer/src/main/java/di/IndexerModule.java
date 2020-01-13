@@ -1,14 +1,16 @@
 package di;
 
+import Indexer.Indexer;
 import accounts.AccountsClient;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import configuration.IndexerConfiguration;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class IndexerModule extends AbstractModule {
 
     @Override
     protected void configure() {
-
+        bind(Indexer.class);
     }
 
     @Provides
@@ -30,41 +32,40 @@ public class IndexerModule extends AbstractModule {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.readValue(new File("../usr/indexer.config"), IndexerConfiguration.class);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Provides
-    public KafkaConsumer providesConsumer(Properties props, IndexerConfiguration indexerConfiguration){
-            KafkaConsumer<String, Map> consumer =  new KafkaConsumer<>(props);
+    public KafkaConsumer providesConsumer(Properties props, IndexerConfiguration indexerConfiguration) {
+        KafkaConsumer<String, Map> consumer = new KafkaConsumer<>(props);
 
-            consumer.subscribe(Arrays.asList(indexerConfiguration.getTopic()));
-            return consumer;
+        consumer.subscribe(Arrays.asList(indexerConfiguration.getTopic()));
+        return consumer;
     }
 
     @Provides
-    public Properties provideProperties(IndexerConfiguration indexerConfiguration){
+    public Properties provideProperties(IndexerConfiguration indexerConfiguration) {
         Properties props = new Properties();
         String kafkaUri = indexerConfiguration.getBrokerHost() + ":" + indexerConfiguration.getBrokerPort();
         props.setProperty("bootstrap.servers", kafkaUri);
-        props.setProperty("group.id", "test");
+        props.setProperty("group.id", indexerConfiguration.getGroupId());
         props.setProperty("enable.auto.commit", "false");
         props.setProperty("auto.commit.interval.ms", Long.toString(indexerConfiguration.getIntervalForCommit()));
-        props.setProperty("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
+        props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         return props;
     }
 
     @Provides
-    RestHighLevelClient provideRestHighLevelClient(IndexerConfiguration indexerConfiguration){
+    RestHighLevelClient provideRestHighLevelClient(IndexerConfiguration indexerConfiguration) {
         return new RestHighLevelClient(RestClient.builder(
-                new HttpHost(indexerConfiguration.getElasticSearchHost(),indexerConfiguration.getElasticSearchPort(), "http")));
+                new HttpHost(indexerConfiguration.getElasticSearchHost(), indexerConfiguration.getElasticSearchPort(), "http")));
     }
 
     @Provides
-    AccountsClient providesAccountsClient(IndexerConfiguration indexerConfiguration){
+    AccountsClient providesAccountsClient(IndexerConfiguration indexerConfiguration) {
         return new AccountsClient(indexerConfiguration.getAccountsClientHost());
     }
 }
