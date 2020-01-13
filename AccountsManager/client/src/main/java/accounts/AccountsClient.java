@@ -11,6 +11,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.Optional;
 
 public class AccountsClient {
 
@@ -22,20 +24,21 @@ public class AccountsClient {
         this.accountsManagerBaseUri = accountsManagerBaseUri;
     }
 
-    public AccountData getAccount(String accountToken) {
+    public Optional<AccountData> getAccount(String accountToken) {
         Client client = ClientBuilder.newClient();
         String getAccountUri = accountsManagerBaseUri + "/accounts";
         Response response = client.target(getAccountUri)
                 .request().header("X-ACCOUNT-TOKEN", accountToken).get();
 
         if (response.getStatusInfo().equals(Response.Status.UNAUTHORIZED)) {
-            throw new NotAuthorizedException("Token not authorized");
-        } else {
+            return Optional.ofNullable(null);
+        }
+        else {
             try {
                 String accountDataAsJson = response.readEntity(String.class);
-                return mapper.readValue(accountDataAsJson, AccountData.class);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                return Optional.ofNullable(mapper.readValue(accountDataAsJson, AccountData.class));
+            } catch (IOException ioe) {
+                throw new RuntimeException(ioe);
             }
         }
     }

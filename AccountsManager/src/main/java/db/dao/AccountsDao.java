@@ -2,7 +2,6 @@ package db.dao;
 
 import javax.inject.Inject;
 
-import accounts.exceptions.DbAccessException;
 import accounts.pojos.AccountData;
 import db.mappers.AccountsMapper;
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -25,7 +24,7 @@ public class AccountsDao {
         }
         catch (PersistenceException pe){
             logger.debug(pe.getCause());
-            throw new RuntimeException();
+            throw pe;
         }
     }
 
@@ -36,7 +35,7 @@ public class AccountsDao {
         }
         catch (PersistenceException pe){
             logger.debug(pe.getCause());
-            throw new RuntimeException();
+            throw pe;
         }
     }
 }

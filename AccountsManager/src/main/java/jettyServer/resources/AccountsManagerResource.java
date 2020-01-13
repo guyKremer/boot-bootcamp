@@ -3,6 +3,7 @@ package jettyServer.resources;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
 import db.dao.AccountsDao;
+import org.apache.ibatis.exceptions.PersistenceException;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
