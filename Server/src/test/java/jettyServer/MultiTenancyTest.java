@@ -18,15 +18,13 @@ public class MultiTenancyTest {
     @Test
     public void run() {
         ObjectMapper mapper = new ObjectMapper();
-
-        String account1Name = generateRandomString();
-        String account2Name = generateRandomString();
+        AccountData account1 = createRandomAccount();
+        AccountData account2 = createRandomAccount();
         String account1Message = generateRandomString();
         String account2Message = generateRandomString();
         String account1header = generateRandomString();
         String account2header = generateRandomString();
-        AccountData account1 = createRandomAccount();
-        AccountData account2 = createRandomAccount();
+
         indexDocument(account1.getToken(), account1Message, account1header);
         indexDocument(account2.getToken(), account2Message, account2header);
             /*
@@ -40,7 +38,5 @@ public class MultiTenancyTest {
              */
         Assert.assertEquals(false, isDocumentIndexed(account1.getToken(), account2Message, account2header));
         Assert.assertEquals(false, isDocumentIndexed(account2.getToken(), account1Message, account1header));
-
-
     }
 }

@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import accounts.AccountsClient;
 import accounts.pojos.AccountData;
+import exceptions.DbAccessException;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -27,6 +28,7 @@ import static java.util.Objects.requireNonNull;
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Path("search")
 public class QueryResource {
@@ -48,18 +50,24 @@ public class QueryResource {
 
 
         try {
-            AccountData account = accountsClient.getAccount(accountToken);
-            SearchRequest searchRequest = buildQuery(account, message, header);
-            String hits = getHits(searchRequest);
-            return Response.ok().entity(hits).build();
-        } catch (NotAuthorizedException noe) {
-            throw noe;
-        } catch (Exception e) {
-            throw new InternalServerErrorException("Something went wrong");
+            Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
+            if(optionalAccountData.isPresent()){
+                AccountData accountData = optionalAccountData.get();
+                SearchRequest searchRequest = buildQuery(accountData, message, header);
+                String hits = getHits(searchRequest);
+                return Response.ok().entity(hits).build();
+            }
+            else{
+                throw new NotAuthorizedException("Token not authorized");
+            }
         }
+        catch (IOException | DbAccessException dbe){
+            throw new InternalServerErrorException();
+        }
+
     }
 
-    private String getHits(SearchRequest searchRequest) throws IOException, JSONException {
+    private String getHits(SearchRequest searchRequest) throws IOException  {
         SearchResponse searchResponse = elasticClient.search(searchRequest);
         return searchResponse.toString();
     }

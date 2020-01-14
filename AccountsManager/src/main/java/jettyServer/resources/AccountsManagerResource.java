@@ -3,6 +3,7 @@ package jettyServer.resources;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
 import db.dao.AccountsDao;
+import exceptions.DbAccessException;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import javax.inject.Inject;
@@ -35,7 +36,13 @@ public class AccountsManagerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createAccount(CreateAccountRequest body) {
         AccountData accountData = new AccountData(body.getAccountName());
-        accountsDao.insertAccount(accountData);
+        try{
+            accountsDao.insertAccount(accountData);
+        }
+        catch (DbAccessException dbe){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+
+        }
         return Response.status(Response.Status.CREATED).entity(accountData).build();
     }
 
@@ -43,13 +50,15 @@ public class AccountsManagerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccount(@Context HttpHeaders httpHeaders) {
         String token = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
-        AccountData accountData = accountsDao.selectAccount(token);
-
-        if (accountData == null) {
-            throw new NotAuthorizedException("Token unauthorized");
+        try{
+            AccountData accountData = accountsDao.selectAccount(token);
+            if (accountData == null) {
+                throw new NotAuthorizedException("Token unauthorized");
+            }
+            return Response.status(Response.Status.OK).entity(accountData).build();
         }
-
-        return Response.status(Response.Status.OK).entity(accountData).build();
-
+        catch (DbAccessException dbe){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

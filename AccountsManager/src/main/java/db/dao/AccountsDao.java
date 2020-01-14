@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import accounts.pojos.AccountData;
 import db.mappers.AccountsMapper;
+import exceptions.DbAccessException;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,24 +19,24 @@ public class AccountsDao {
     private AccountsMapper accountsMapper;
 
     @Transactional
-    public AccountData selectAccount(String token){
+    public AccountData selectAccount(String token) throws DbAccessException {
         try{
             return accountsMapper.selectAccount(token);
         }
         catch (PersistenceException pe){
             logger.debug(pe.getCause());
-            throw pe;
+            throw new DbAccessException (pe.getMessage());
         }
     }
 
     @Transactional
-    public void insertAccount(AccountData accountData){
+    public void insertAccount(AccountData accountData) throws DbAccessException {
         try{
             accountsMapper.insertAccount(accountData);
         }
         catch (PersistenceException pe){
             logger.debug(pe.getCause());
-            throw pe;
+            throw new DbAccessException (pe.getMessage());
         }
     }
 }

@@ -3,6 +3,7 @@ package jettyServer.resources.indexingResource;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,10 +17,16 @@ import javax.ws.rs.core.Response;
 
 import accounts.AccountsClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import exceptions.DbAccessException;
 import jettyServer.configuration.IndexingResourceConfiguration;
 import kafka.KafkaRecord;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.connect.errors.DataException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
 
 import static java.util.Objects.requireNonNull;
 
@@ -29,6 +36,7 @@ public class IndexingResource {
     private final IndexingResourceConfiguration indexingResourceConfiguration;
     private final Producer producer;
     private final AccountsClient accountsClient;
+
 
 
     @Inject
@@ -45,13 +53,12 @@ public class IndexingResource {
     public Response post(IndexingRequestObj body, @HeaderParam("user-agent") String userAgent,@Context HttpHeaders httpHeaders) {
         ObjectMapper objectMapper = new ObjectMapper();
         String accountToken = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
-        boolean authenticated = accountsClient.isAuthenticated(accountToken);
-
-        if(! authenticated ){
-            throw new NotAuthorizedException("Token not authorized");
-        }
 
         try{
+            boolean authenticated = accountsClient.isAuthenticated(accountToken);
+            if( ! authenticated ){
+                throw new NotAuthorizedException("Token not authorized");
+            }
             KafkaRecord kafkaRecord = new KafkaRecord(accountToken,body.getMessage(),userAgent);
             String kafkaRecordAsJson = objectMapper.writeValueAsString(kafkaRecord);
             ProducerRecord<String, String> record = new ProducerRecord<>(indexingResourceConfiguration.getKafkaTopic(), kafkaRecordAsJson);
@@ -59,8 +66,8 @@ public class IndexingResource {
             producer.send(record);
             return Response.ok().build();
         }
-        catch (Exception e){
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        catch (IOException | DbAccessException e){
+            throw new InternalServerErrorException();
         }
     }
 }
