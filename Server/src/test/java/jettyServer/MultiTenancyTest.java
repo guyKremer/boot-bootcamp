@@ -17,7 +17,6 @@ public class MultiTenancyTest {
 
     @Test
     public void run() {
-        ObjectMapper mapper = new ObjectMapper();
         AccountData account1 = createRandomAccount();
         AccountData account2 = createRandomAccount();
         String account1Message = generateRandomString();
