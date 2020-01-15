@@ -48,33 +48,5 @@ public class MybatisConfiguration {
         return autoCommit;
     }
 
-    public void setMybatisEnvironmentId(String mybatisEnvironmentId) {
-        this.mybatisEnvironmentId = mybatisEnvironmentId;
-    }
-
-    public void setAutoCommit(boolean autoCommit) {
-        this.autoCommit = autoCommit;
-    }
-
-    public void setDataBaseHost(String dataBaseHost) {
-        this.dataBaseHost = dataBaseHost;
-    }
-
-    public void setDataBasePort(int dataBasePort) {
-        this.dataBasePort = dataBasePort;
-    }
-
-    public void setDataBaseUsername(String dataBaseUsername) {
-        this.dataBaseUsername = dataBaseUsername;
-    }
-
-    public void setDataBaseUserPassword(String dataBaseUserPassword) {
-        this.dataBaseUserPassword = dataBaseUserPassword;
-    }
-
-    public void setSchema(String schema) {
-        this.schema = schema;
-    }
-
 }
 

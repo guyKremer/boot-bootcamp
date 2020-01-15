@@ -20,7 +20,6 @@ import static org.awaitility.Awaitility.await;
 public class CreateIndexQueryTest {
 
 
-    private ObjectMapper mapper = new ObjectMapper();
 
     @Test
     public void run() {

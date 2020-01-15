@@ -3,7 +3,6 @@ package jettyServer.resources.indexingResource;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,17 +15,16 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import accounts.AccountsClient;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import exceptions.DbAccessException;
+import accounts.pojos.AccountData;
+import common.api.RequestConstants;
+import common.parsers.JsonParser;
 import jettyServer.configuration.IndexingResourceConfiguration;
 import kafka.KafkaRecord;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.connect.errors.DataException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
+
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
@@ -38,9 +36,8 @@ public class IndexingResource {
     private final AccountsClient accountsClient;
 
 
-
     @Inject
-    public IndexingResource(IndexingResourceConfiguration indexingResourceConfiguration,AccountsClient accountsClient ,Producer producer) {
+    public IndexingResource(IndexingResourceConfiguration indexingResourceConfiguration, AccountsClient accountsClient, Producer producer) {
         this.indexingResourceConfiguration = requireNonNull(indexingResourceConfiguration);
         this.producer = requireNonNull(producer);
         this.accountsClient = requireNonNull(accountsClient);
@@ -50,24 +47,21 @@ public class IndexingResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(IndexingRequestObj body, @HeaderParam("user-agent") String userAgent,@Context HttpHeaders httpHeaders) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String accountToken = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
+    public Response post(IndexingRequestObj body, @HeaderParam("user-agent") String userAgent, @Context HttpHeaders httpHeaders) {
 
-        try{
-            boolean authenticated = accountsClient.isAuthenticated(accountToken);
-            if( ! authenticated ){
-                throw new NotAuthorizedException("Token not authorized");
-            }
-            KafkaRecord kafkaRecord = new KafkaRecord(accountToken,body.getMessage(),userAgent);
-            String kafkaRecordAsJson = objectMapper.writeValueAsString(kafkaRecord);
-            ProducerRecord<String, String> record = new ProducerRecord<>(indexingResourceConfiguration.getKafkaTopic(), kafkaRecordAsJson);
+        String accountToken = httpHeaders.getHeaderString(RequestConstants.ACCOUNT_TOKEN_KEY);
 
-            producer.send(record);
-            return Response.ok().build();
+        Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
+        if (!optionalAccountData.isPresent()) {
+            throw new NotAuthorizedException("Token not authorized");
         }
-        catch (IOException | DbAccessException e){
-            throw new InternalServerErrorException();
+        else{
+            KafkaRecord kafkaRecord = new KafkaRecord(accountToken, body.getMessage(), userAgent);
+            String kafkaRecordAsJson = JsonParser.writeAsJson(kafkaRecord);
+            ProducerRecord<String, String> record = new ProducerRecord<>(indexingResourceConfiguration.getKafkaTopic(), kafkaRecordAsJson);
+            producer.send(record);
+
+            return Response.ok().build();
         }
     }
 }

@@ -6,6 +6,7 @@ import accounts.pojos.CreateAccountRequest;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
+import common.parsers.JsonParser;
 import org.apache.commons.lang3.RandomStringUtils;
 
 
@@ -32,32 +33,23 @@ public class TestUtils {
         indexedFields.put("message", messageValue);
         indexedFields.put("header", headerValue);
 
-        try {
-            reqBody.put("message", messageValue);
-            Response response = client.target(INDEX_URI)
-                    .request()
-                    .header("X-ACCOUNT-TOKEN", accountToken)
-                    .header("user-agent", headerValue)
-                    .post(Entity.json(new ObjectMapper().writeValueAsString(reqBody)));
+        reqBody.put("message", messageValue);
+        Response response = client.target(INDEX_URI)
+                .request()
+                .header("X-ACCOUNT-TOKEN", accountToken)
+                .header("user-agent", headerValue)
+                .post(Entity.json(JsonParser.writeAsJson(reqBody)));
 
-            return response;
+        return response;
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public static boolean isDocumentIndexed(String accountToken, String messageValue, String headerValue) {
-        ObjectMapper mapper = new ObjectMapper();
         int expectedHits = 1;
+        Response response = searchDocument(accountToken, messageValue, headerValue);
+        JsonNode root = JsonParser.readTree(response.readEntity(String.class));
 
-        try {
-            Response response = searchDocument(accountToken, messageValue, headerValue);
-            JsonNode root = mapper.readTree(response.readEntity(String.class));
-            return root.path("hits").path("total").asInt() == expectedHits;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return root.path("hits").path("total").asInt() == expectedHits;
     }
 
 
@@ -72,27 +64,22 @@ public class TestUtils {
     }
 
     public static AccountData createRandomAccount() {
-        ObjectMapper mapper = new ObjectMapper();
         String accountName = generateRandomString();
-        Map<String, String> createAccountRequestAsMap = ImmutableMap.of("accountName", accountName);
         Client client = ClientBuilder.newClient();
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest(accountName);
+        Response response = client.target(CREATE_ACCOUNT_URI)
+                .request().post(Entity.json(createAccountRequest));
+        String accountDataAsJson = response.readEntity(String.class);
 
-        try {
-            String createAccountRequestAsJson = mapper.writeValueAsString(createAccountRequestAsMap);
-            CreateAccountRequest createAccountRequest = mapper.readValue(createAccountRequestAsJson, CreateAccountRequest.class);
-            Response response = client.target(CREATE_ACCOUNT_URI)
-                    .request().post(Entity.json(createAccountRequest));
-
-            String accountDataAsJson = response.readEntity(String.class);
-            return mapper.readValue(accountDataAsJson, AccountData.class);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return JsonParser.parse(accountDataAsJson, AccountData.class);
 
     }
 
     public static String generateRandomString() {
         return RandomStringUtils.random(6, true, false);
+    }
+
+    public static String generateRandomToken() {
+        return RandomStringUtils.random(33, true, false);
     }
 }

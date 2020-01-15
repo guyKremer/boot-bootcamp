@@ -1,6 +1,5 @@
 package jettyServer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import accounts.pojos.AccountData;
 import org.junit.Assert;
 import org.junit.Test;

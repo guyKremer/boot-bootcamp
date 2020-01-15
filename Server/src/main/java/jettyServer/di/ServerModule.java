@@ -1,9 +1,9 @@
 package jettyServer.di;
 
 import accounts.AccountsClient;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import common.parsers.JsonParser;
 import io.logz.guice.jersey.JerseyModule;
 import io.logz.guice.jersey.configuration.JerseyConfiguration;
 import jettyServer.configuration.IndexingResourceConfiguration;
@@ -11,7 +11,6 @@ import jettyServer.configuration.QueryResourceConfiguration;
 import jettyServer.configuration.ServerConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 
 public class ServerModule extends AbstractModule {
 
@@ -23,27 +22,21 @@ public class ServerModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        ObjectMapper mapper = new ObjectMapper();
         binder().requireExplicitBindings();
         JerseyConfiguration configuration = JerseyConfiguration.builder()
                 .addPackage("jettyServer.resources")
                 .addPort(serverConfiguration.getPort())
                 .withContextPath("/*")
                 .build();
-        try {
-            IndexingResourceConfiguration indexingResourceConfiguration = mapper.readValue(new File("/usr/indexingResource.config"), IndexingResourceConfiguration.class);
-            QueryResourceConfiguration queryResourceConfiguration = mapper.readValue(new File("/usr/queryResource.config"), QueryResourceConfiguration.class);
-            install(new JerseyModule(configuration));
-            install(new QueryResourceModule(queryResourceConfiguration));
-            install(new IndexingResourceModule(indexingResourceConfiguration));
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
+        IndexingResourceConfiguration indexingResourceConfiguration = JsonParser.parse(new File("/usr/indexingResource.config"), IndexingResourceConfiguration.class);
+        QueryResourceConfiguration queryResourceConfiguration = JsonParser.parse(new File("/usr/queryResource.config"), QueryResourceConfiguration.class);
+        install(new JerseyModule(configuration));
+        install(new QueryResourceModule(queryResourceConfiguration));
+        install(new IndexingResourceModule(indexingResourceConfiguration));
     }
 
-
     @Provides
-    AccountsClient providesAccountsClient(){
+    AccountsClient providesAccountsClient() {
         return new AccountsClient(serverConfiguration.getAccountsManagerBaseUri());
     }
 

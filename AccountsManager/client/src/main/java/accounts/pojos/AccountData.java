@@ -13,10 +13,7 @@ public class AccountData {
     }
 
     public AccountData(String accountName) {
-        setAccount(accountName);
-    }
 
-    private void setAccount(String accountName) {
         String indexName = RandomStringUtils.random(33, true, false).toLowerCase();
         String token = RandomStringUtils.random(33, true, false);
 
@@ -33,11 +30,9 @@ public class AccountData {
         return id;
     }
 
-
     public String getIndexName() {
         return indexName;
     }
-
 
     public String getName() {
         return name;

@@ -4,83 +4,53 @@ package accounts;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import exceptions.DbAccessException;
+import common.api.RequestConstants;
+import common.parsers.JsonParser;
 
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.DataBindingException;
-import java.io.IOException;
 import java.util.Optional;
 
 public class AccountsClient {
 
     private final String accountsManagerBaseUri;
-    ObjectMapper mapper = new ObjectMapper();
+    private final Client client;
 
 
     public AccountsClient(String accountsManagerBaseUri) {
         this.accountsManagerBaseUri = accountsManagerBaseUri;
+        this.client = ClientBuilder.newClient();
+
     }
 
-    public Optional<AccountData> getAccount(String accountToken) throws DbAccessException {
-        Client client = ClientBuilder.newClient();
+    public Optional<AccountData> getAccount(String accountToken) {
         String getAccountUri = accountsManagerBaseUri + "/accounts";
         Response response = client.target(getAccountUri)
-                .request().header("X-ACCOUNT-TOKEN", accountToken).get();
+                .request().header(RequestConstants.ACCOUNT_TOKEN_KEY, accountToken).get();
 
         if (response.getStatusInfo().equals(Response.Status.UNAUTHORIZED)) {
-            return Optional.ofNullable(null);
+            return Optional.empty();
+        } else if (!response.getStatusInfo().equals(Response.Status.OK)) {
+            throw new RuntimeException();
         }
-        else if (!response.getStatusInfo().equals(Response.Status.OK)) {
-            throw new DbAccessException("Couldn't retrieve account");
-        }
-        else {
-            try {
-                String accountDataAsJson = response.readEntity(String.class);
-                return Optional.ofNullable(mapper.readValue(accountDataAsJson, AccountData.class));
-            } catch (IOException ioe) {
-                throw new RuntimeException(ioe);
-            }
-        }
+        String accountDataAsJson = response.readEntity(String.class);
+        return Optional.of(JsonParser.parse(accountDataAsJson, AccountData.class));
+
     }
 
-    public boolean isAuthenticated(String accountToken) throws DbAccessException {
-        Client client = ClientBuilder.newClient();
-        String getAccountUri = accountsManagerBaseUri + "/accounts";
-        Response response = client.target(getAccountUri)
-                .request().header("X-ACCOUNT-TOKEN", accountToken).get();
-
-        if (!response.getStatusInfo().equals(Response.Status.OK)) {
-            throw new DbAccessException("Couldn't retrieve account");
-        }
-        else if (response.getStatusInfo().equals(Response.Status.UNAUTHORIZED)) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-
-    public AccountData createAccount(CreateAccountRequest createAccountRequest) throws DbAccessException {
-        Client client = ClientBuilder.newClient();
+    public AccountData createAccount(CreateAccountRequest createAccountRequest) {
         String createAccountUri = accountsManagerBaseUri + "/accounts";
 
         Response response = client.target(createAccountUri)
                 .request().post(Entity.json(createAccountRequest));
 
         if (!response.getStatusInfo().equals(Response.Status.CREATED)) {
-            throw new DbAccessException("Couldn't create account " + createAccountRequest.getAccountName());
+            throw new RuntimeException();
         }
 
-        try {
-            String accountDataAsJson = response.readEntity(String.class);
-            return mapper.readValue(accountDataAsJson, AccountData.class);
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
+        String accountDataAsJson = response.readEntity(String.class);
+        return JsonParser.parse(accountDataAsJson, AccountData.class);
     }
 }

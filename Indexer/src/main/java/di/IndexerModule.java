@@ -4,10 +4,10 @@ import Indexer.Indexer;
 import accounts.AccountsClient;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import common.parsers.JsonParser;
 import configuration.IndexerConfiguration;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
@@ -29,12 +29,7 @@ public class IndexerModule extends AbstractModule {
 
     @Provides
     public IndexerConfiguration providesIndexerConfiguration() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.readValue(new File("../usr/indexer.config"), IndexerConfiguration.class);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+            return JsonParser.parse(new File("../usr/indexer.config"), IndexerConfiguration.class);
     }
 
     @Provides

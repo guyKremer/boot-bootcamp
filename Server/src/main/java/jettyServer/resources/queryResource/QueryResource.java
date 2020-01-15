@@ -15,18 +15,14 @@ import javax.ws.rs.core.Response;
 
 import accounts.AccountsClient;
 import accounts.pojos.AccountData;
-import exceptions.DbAccessException;
+import common.api.RequestConstants;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.json.JSONException;
-
 import static java.util.Objects.requireNonNull;
-
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -46,35 +42,31 @@ public class QueryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response query(@Context HttpHeaders httpHeaders, @QueryParam("message") String message, @QueryParam("header") String header) {
 
-        String accountToken = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
+        String accountToken = httpHeaders.getHeaderString(RequestConstants.ACCOUNT_TOKEN_KEY);
 
+        Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
+        if (optionalAccountData.isPresent()) {
+            AccountData accountData = optionalAccountData.get();
+            SearchRequest searchRequest = buildQuery(accountData.getIndexName(), message, header);
+            String hits = getHits(searchRequest);
+            return Response.ok().entity(hits).build();
+        } else {
+            throw new NotAuthorizedException("Token not authorized");
+        }
 
+    }
+
+    private String getHits(SearchRequest searchRequest) {
         try {
-            Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
-            if(optionalAccountData.isPresent()){
-                AccountData accountData = optionalAccountData.get();
-                SearchRequest searchRequest = buildQuery(accountData, message, header);
-                String hits = getHits(searchRequest);
-                return Response.ok().entity(hits).build();
-            }
-            else{
-                throw new NotAuthorizedException("Token not authorized");
-            }
+            SearchResponse searchResponse = elasticClient.search(searchRequest);
+            return searchResponse.toString();
+        } catch (IOException ioe) {
+            throw new RuntimeException((ioe));
         }
-        catch (IOException | DbAccessException dbe){
-            throw new InternalServerErrorException();
-        }
-
     }
 
-    private String getHits(SearchRequest searchRequest) throws IOException  {
-        SearchResponse searchResponse = elasticClient.search(searchRequest);
-        return searchResponse.toString();
-    }
-
-    private SearchRequest buildQuery(AccountData account, String message, String header) {
-        String indexName = account.getIndexName();
-        SearchRequest searchRequest = new SearchRequest(indexName);
+    private SearchRequest buildQuery(String index, String message, String header) {
+        SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder qb = new BoolQueryBuilder();
         qb.must(QueryBuilders.matchQuery("message", message));

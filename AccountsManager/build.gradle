@@ -37,7 +37,6 @@ dependencies {
     compile group:'org.glassfish.jersey.containers',name: 'jersey-container-jetty-http', version: '2.7'
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
     compile 'io.logz:guice-jersey:1.0.9'
-    compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
     compile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.1.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.1'
@@ -47,6 +46,4 @@ dependencies {
     compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
     compile project(':AccountsManager:clent')
     compile project(':Infrastructure')
-
-
 }

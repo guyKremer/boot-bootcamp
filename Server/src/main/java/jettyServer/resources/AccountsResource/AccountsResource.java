@@ -3,12 +3,11 @@ package jettyServer.resources.AccountsResource;
 import accounts.AccountsClient;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
-import exceptions.DbAccessException;
+import common.api.RequestConstants;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -27,7 +26,7 @@ public class AccountsResource {
     private final AccountsClient accountsClient;
 
     @Inject
-    public AccountsResource(AccountsClient accountsClient){
+    public AccountsResource(AccountsClient accountsClient) {
         this.accountsClient = accountsClient;
     }
 
@@ -36,34 +35,24 @@ public class AccountsResource {
     @Path("create-account")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(CreateAccountRequest body){
+    public Response post(CreateAccountRequest body) {
 
-        try{
-            AccountData account = accountsClient.createAccount(body);
-            return Response.status(Response.Status.CREATED).entity(account).build();
-        }
-        catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Couldn't create account").build();
-        }
+        AccountData account = accountsClient.createAccount(body);
+        return Response.status(Response.Status.CREATED).entity(account).build();
+
     }
 
     @GET
     @Path("get-account")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccount(@Context HttpHeaders httpHeaders) {
-        String accountToken = httpHeaders.getHeaderString("X-ACCOUNT-TOKEN");
-        try {
-            Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
-            if(optionalAccountData.isPresent()){
-                AccountData accountData = optionalAccountData.get();
-                return Response.status(Response.Status.OK).entity(accountData).build();
-            }
-            else{
-                throw new NotAuthorizedException("Token not authorized");
-            }
-        }
-        catch (DbAccessException dbe) {
-            throw new InternalServerErrorException();
+        String accountToken = httpHeaders.getHeaderString(RequestConstants.ACCOUNT_TOKEN_KEY);
+        Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
+        if (optionalAccountData.isPresent()) {
+            AccountData accountData = optionalAccountData.get();
+            return Response.status(Response.Status.OK).entity(accountData).build();
+        } else {
+            throw new NotAuthorizedException("Token not authorized");
         }
     }
 }

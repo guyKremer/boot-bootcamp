@@ -19,14 +19,6 @@ public class KafkaRecord implements Serializable {
         this.source.put("header",header);
     }
 
-    public void setAccountToken(String accountToken) {
-        this.accountToken = accountToken;
-    }
-
-    public void setSource(Map<String, String> source) {
-        this.source = source;
-    }
-
     public String getAccountToken() {
         return accountToken;
     }
