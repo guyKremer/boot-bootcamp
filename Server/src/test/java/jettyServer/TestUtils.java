@@ -1,21 +1,16 @@
 package jettyServer;
 
-import accounts.AccountsClient;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableMap;
 import common.parsers.JsonParser;
 import org.apache.commons.lang3.RandomStringUtils;
-
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -45,11 +40,9 @@ public class TestUtils {
     }
 
     public static boolean isDocumentIndexed(String accountToken, String messageValue, String headerValue) {
-        int expectedHits = 1;
         Response response = searchDocument(accountToken, messageValue, headerValue);
-        JsonNode root = JsonParser.readTree(response.readEntity(String.class));
-
-        return root.path("hits").path("total").asInt() == expectedHits;
+        List<Map<String,Object>> root = JsonParser.parse(response.readEntity(String.class), List.class);
+        return !root.isEmpty();
     }
 
 

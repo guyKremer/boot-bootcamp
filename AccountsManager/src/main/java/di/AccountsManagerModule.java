@@ -1,6 +1,5 @@
 package di;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.AbstractModule;
 import common.parsers.JsonParser;
 import configuration.MybatisConfiguration;
@@ -17,7 +16,6 @@ public class AccountsManagerModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        ObjectMapper mapper = new ObjectMapper();
         JerseyConfiguration configuration = JerseyConfiguration.builder()
                 .addPackage("jettyServer.resources")
                 .addPort(80)

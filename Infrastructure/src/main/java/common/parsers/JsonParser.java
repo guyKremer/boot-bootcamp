@@ -1,6 +1,5 @@
 package common.parsers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -37,15 +36,4 @@ public class JsonParser {
             throw new RuntimeException(ioe);
         }
     }
-
-    public static JsonNode readTree(String json){
-        try{
-            return mapper.readTree(json);
-        }
-        catch (IOException ioe){
-            throw new RuntimeException(ioe);
-        }
-    }
-
-
 }

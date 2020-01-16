@@ -1,9 +1,7 @@
 package di;
 
-import com.google.inject.Provides;
 import com.google.inject.name.Names;
 import configuration.MybatisConfiguration;
-import db.dao.AccountsDao;
 import db.mappers.AccountsMapper;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;

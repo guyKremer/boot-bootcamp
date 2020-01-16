@@ -1,7 +1,5 @@
 package accounts.pojos;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 public class AccountData {
 
     private String name;
@@ -12,11 +10,7 @@ public class AccountData {
     public AccountData() {
     }
 
-    public AccountData(String accountName) {
-
-        String indexName = RandomStringUtils.random(33, true, false).toLowerCase();
-        String token = RandomStringUtils.random(33, true, false);
-
+    public AccountData(String accountName, String indexName, String token) {
         this.name = accountName;
         this.indexName = indexName;
         this.token = token;

@@ -3,8 +3,8 @@ package jettyServer.resources;
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
 import common.api.RequestConstants;
-import db.dao.AccountsDao;
 import db.mappers.AccountsMapper;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -33,7 +33,7 @@ public class AccountsManagerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createAccount(CreateAccountRequest body) {
-        AccountData accountData = new AccountData(body.getAccountName());
+        AccountData accountData = new AccountData(body.getAccountName(),RandomStringUtils.random(33, true, false).toLowerCase(),RandomStringUtils.random(33, true, false));
         accountsMapper.insertAccount(accountData);
         return Response.status(Response.Status.CREATED).entity(accountData).build();
     }

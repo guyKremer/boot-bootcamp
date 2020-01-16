@@ -3,7 +3,6 @@ package accounts;
 
 import accounts.pojos.AccountData;
 import accounts.pojos.CreateAccountRequest;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import common.api.RequestConstants;
 import common.parsers.JsonParser;
 
@@ -33,7 +32,7 @@ public class AccountsClient {
         if (response.getStatusInfo().equals(Response.Status.UNAUTHORIZED)) {
             return Optional.empty();
         } else if (!response.getStatusInfo().equals(Response.Status.OK)) {
-            throw new RuntimeException();
+            throw new RuntimeException(response.readEntity(String.class));
         }
         String accountDataAsJson = response.readEntity(String.class);
         return Optional.of(JsonParser.parse(accountDataAsJson, AccountData.class));
@@ -47,7 +46,7 @@ public class AccountsClient {
                 .request().post(Entity.json(createAccountRequest));
 
         if (!response.getStatusInfo().equals(Response.Status.CREATED)) {
-            throw new RuntimeException();
+            throw new RuntimeException(response.readEntity(String.class));
         }
 
         String accountDataAsJson = response.readEntity(String.class);

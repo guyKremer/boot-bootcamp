@@ -1,16 +1,8 @@
 package jettyServer;
 
-import accounts.AccountsClient;
 import accounts.pojos.AccountData;
-import accounts.pojos.CreateAccountRequest;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import static jettyServer.TestUtils.createRandomAccount;
 import static jettyServer.TestUtils.generateRandomString;
 import static jettyServer.TestUtils.indexDocument;

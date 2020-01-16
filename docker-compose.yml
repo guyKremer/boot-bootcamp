@@ -11,14 +11,10 @@ services:
     links:
       - accountsmanager
 
-
   accountsmanager:
     build: ./AccountsManager
     depends_on:
       - mysql
-    ports:
-      - 8002:80
-
 
   elasticSearch:
     image: elastic/elasticsearch:6.8.3
@@ -47,7 +43,6 @@ services:
     depends_on:
       - zookeeper
     environment:
-      #      KAFKA_ADVERTISED_HOST_NAME: kafkabroker
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafkabroker:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_CREATE_TOPICS: "bootcamp:1:1"

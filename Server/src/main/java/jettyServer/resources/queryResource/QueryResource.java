@@ -1,18 +1,5 @@
 package jettyServer.resources.queryResource;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-
 import accounts.AccountsClient;
 import accounts.pojos.AccountData;
 import common.api.RequestConstants;
@@ -21,10 +8,26 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import static java.util.Objects.requireNonNull;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.NotAuthorizedException;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
 
 @Path("search")
 public class QueryResource {
@@ -44,25 +47,36 @@ public class QueryResource {
 
         String accountToken = httpHeaders.getHeaderString(RequestConstants.ACCOUNT_TOKEN_KEY);
 
+
         Optional<AccountData> optionalAccountData = accountsClient.getAccount(accountToken);
         if (optionalAccountData.isPresent()) {
             AccountData accountData = optionalAccountData.get();
             SearchRequest searchRequest = buildQuery(accountData.getIndexName(), message, header);
-            String hits = getHits(searchRequest);
-            return Response.ok().entity(hits).build();
+            SearchHit[] hits = getHits(searchRequest);
+            List<Map<String,Object>> responseBody = generateSearchResponse(hits);
+            return Response.ok().entity(responseBody).build();
         } else {
             throw new NotAuthorizedException("Token not authorized");
         }
 
     }
 
-    private String getHits(SearchRequest searchRequest) {
+    private SearchHit[] getHits(SearchRequest searchRequest) {
         try {
             SearchResponse searchResponse = elasticClient.search(searchRequest);
-            return searchResponse.toString();
+            return searchResponse.getHits().getHits();
         } catch (IOException ioe) {
             throw new RuntimeException((ioe));
         }
+    }
+
+    private List<Map<String,Object>> generateSearchResponse(SearchHit[] searchHits){
+        List<Map<String,Object>> res = new ArrayList<>();
+
+        for (SearchHit hit : searchHits){
+            res.add(hit.getSourceAsMap());
+        }
+        return res;
     }
 
     private SearchRequest buildQuery(String index, String message, String header) {
